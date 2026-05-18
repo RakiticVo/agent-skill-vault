@@ -80,7 +80,7 @@ For a Flutter project:
 6. Call `doctor` for the current project.
 7. For future tasks, read `AGENTS.md`, `CLAUDE.md`, `GEMINI.md`, and the installed skill files before planning or editing.
 
-For broader projects, add packs such as `ai`, `code`, `design`, `git`, `agents`, `mcp`, `research`, `kotlin`, or `javascript`.
+For broader projects, add packs such as `ai`, `code`, `design`, `git`, `agents`, `mcp`, `research`, `security`, `devops`, `data`, `ml`, `creative`, `kotlin`, or `javascript`.
 
 ## Remote Alternative
 

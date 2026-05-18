@@ -8,7 +8,7 @@ If an agent reaches this repository through GitHub MCP first, start with [INSTAL
 
 ```bash
 node ./bin/agent-skills.js list --pack all
-node ./bin/agent-skills.js list --pack ai,code,design,git,agents,mcp,research
+node ./bin/agent-skills.js list --pack ai,code,design,git,agents,mcp,research,security,devops,data,ml,creative
 node ./bin/agent-skills.js list --source https://github.com/RakiticVo/agent-skill-vault --version v0.1.0 --pack core,flutter
 node ./bin/agent-skills.js recommend-flutter-stack --size medium --flow standard
 node ./bin/agent-skills.js install --project /path/to/flutter_app --packs core,flutter --source https://github.com/RakiticVo/agent-skill-vault --version v0.1.0 --targets codex,claude,gemini
@@ -21,7 +21,7 @@ Smoke examples:
 
 ```bash
 node ./bin/agent-skills.js list --pack ai,code,design
-node ./bin/agent-skills.js install --project C:\tmp\skill-smoke --packs core,ai,design,mcp
+node ./bin/agent-skills.js install --project C:\tmp\skill-smoke --packs core,ai,design,mcp,security,devops,creative
 node ./bin/agent-skills.js doctor --project C:\tmp\skill-smoke
 ```
 
@@ -65,6 +65,11 @@ Current V1 packs:
 - `agents`
 - `mcp`
 - `research`
+- `security`
+- `devops`
+- `data`
+- `ml`
+- `creative`
 
 GitHub-backed MCP config shape:
 

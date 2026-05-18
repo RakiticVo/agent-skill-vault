@@ -67,6 +67,23 @@ test('installer supports design and mcp packs', async () => {
   assert.ok(lock.installedSkills.includes('mcp-tool-design'));
 });
 
+test('installer supports security devops data ml and creative packs', async () => {
+  const root = await fs.mkdtemp(path.join(os.tmpdir(), 'agent-skills-extended-'));
+  await installSkills({
+    projectDir: root,
+    version: 'v0.1.0',
+    targets: ['codex'],
+    packs: ['security', 'devops', 'data', 'ml', 'creative']
+  });
+  const lock = JSON.parse(await fs.readFile(path.join(root, '.agents/skills.lock.json'), 'utf8'));
+  assert.deepEqual(lock.installedPacks, ['core', 'security', 'devops', 'data', 'ml', 'creative']);
+  assert.ok(lock.installedSkills.includes('skill-security-audit'));
+  assert.ok(lock.installedSkills.includes('docker-essentials'));
+  assert.ok(lock.installedSkills.includes('data-analysis-duckdb'));
+  assert.ok(lock.installedSkills.includes('ml-experiment-monitoring'));
+  assert.ok(lock.installedSkills.includes('artifact-builder'));
+});
+
 test('doctor passes a compliant installed project', async () => {
   const root = await makeProject();
   await installSkills({ projectDir: root, version: 'v0.1.0', targets: ['codex', 'claude', 'gemini'] });
