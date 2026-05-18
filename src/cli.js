@@ -32,9 +32,9 @@ function help() {
   return `Agent Skill Vault
 
 Usage:
-  agent-skills list [--pack all|core,ai,code,flutter,kotlin,javascript,design,git,agents,mcp,research,security,devops,data,ml,creative] [--source github:user/repo|https://github.com/user/repo] [--version v0.1.0]
+  agent-skills list [--pack all|core,planning,ai,code,flutter,kotlin,javascript,design,git,agents,mcp,research,security,devops,data,ml,creative] [--source github:user/repo|https://github.com/user/repo] [--version v0.1.0]
   agent-skills recommend-flutter-stack [--size small|medium|large] [--flow simple|standard|event-heavy] [--async simple|complex]
-  agent-skills install --project <path> [--packs core,ai,code,security,devops] [--source github:user/repo|https://github.com/user/repo] [--targets codex,claude,gemini] [--version v0.1.0] [--skills all|name,name]
+  agent-skills install --project <path> [--packs core,planning,ai,code,security,devops] [--source github:user/repo|https://github.com/user/repo] [--targets codex,claude,gemini] [--version v0.1.0] [--skills all|name,name]
   agent-skills update --project <path> --version <vX.Y.Z>
   agent-skills doctor --project <path> [--packs flutter]
   agent-skills mcp [--source github:user/repo|https://github.com/user/repo] [--version v0.1.0]

@@ -84,6 +84,23 @@ test('installer supports security devops data ml and creative packs', async () =
   assert.ok(lock.installedSkills.includes('artifact-builder'));
 });
 
+test('installer creates planning workspace for planning pack', async () => {
+  const root = await fs.mkdtemp(path.join(os.tmpdir(), 'agent-skills-planning-'));
+  const result = await installSkills({
+    projectDir: root,
+    version: 'v0.1.0',
+    targets: ['codex'],
+    packs: ['planning']
+  });
+  const lock = JSON.parse(await fs.readFile(path.join(root, '.agents/skills.lock.json'), 'utf8'));
+  assert.deepEqual(lock.installedPacks, ['core', 'planning']);
+  assert.ok(lock.installedSkills.includes('project-plan-ledger'));
+  assert.ok(result.planningFiles.includes('.agent-plans\\INDEX.md') || result.planningFiles.includes('.agent-plans/INDEX.md'));
+  assert.ok(await fs.stat(path.join(root, '.agent-plans', 'INDEX.md')));
+  assert.ok(await fs.stat(path.join(root, '.agent-plans', 'templates', 'PLAN_TEMPLATE.md')));
+  assert.ok(await fs.stat(path.join(root, '.agent-plans', 'decisions')));
+});
+
 test('doctor passes a compliant installed project', async () => {
   const root = await makeProject();
   await installSkills({ projectDir: root, version: 'v0.1.0', targets: ['codex', 'claude', 'gemini'] });

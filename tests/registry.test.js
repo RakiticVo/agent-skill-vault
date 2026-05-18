@@ -19,7 +19,7 @@ test('can list only core pack', async () => {
 
 test('can list all V1 packs', async () => {
   const result = await listSkills({ packs: ['all'] });
-  for (const pack of ['ai', 'code', 'flutter', 'kotlin', 'javascript', 'design', 'git', 'agents', 'mcp', 'research', 'security', 'devops', 'data', 'ml', 'creative']) {
+  for (const pack of ['ai', 'planning', 'code', 'flutter', 'kotlin', 'javascript', 'design', 'git', 'agents', 'mcp', 'research', 'security', 'devops', 'data', 'ml', 'creative']) {
     assert.ok(result.packs.includes(pack), `missing pack ${pack}`);
   }
 });

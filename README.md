@@ -8,7 +8,7 @@ If an agent reaches this repository through GitHub MCP first, start with [INSTAL
 
 ```bash
 node ./bin/agent-skills.js list --pack all
-node ./bin/agent-skills.js list --pack ai,code,design,git,agents,mcp,research,security,devops,data,ml,creative
+node ./bin/agent-skills.js list --pack planning,ai,code,design,git,agents,mcp,research,security,devops,data,ml,creative
 node ./bin/agent-skills.js list --source https://github.com/RakiticVo/agent-skill-vault --version v0.1.0 --pack core,flutter
 node ./bin/agent-skills.js recommend-flutter-stack --size medium --flow standard
 node ./bin/agent-skills.js install --project /path/to/flutter_app --packs core,flutter --source https://github.com/RakiticVo/agent-skill-vault --version v0.1.0 --targets codex,claude,gemini
@@ -21,7 +21,7 @@ Smoke examples:
 
 ```bash
 node ./bin/agent-skills.js list --pack ai,code,design
-node ./bin/agent-skills.js install --project C:\tmp\skill-smoke --packs core,ai,design,mcp,security,devops,creative
+node ./bin/agent-skills.js install --project C:\tmp\skill-smoke --packs core,planning,ai,design,mcp,security,devops,creative
 node ./bin/agent-skills.js doctor --project C:\tmp\skill-smoke
 ```
 
@@ -30,6 +30,7 @@ node ./bin/agent-skills.js doctor --project C:\tmp\skill-smoke
 - Source skills live in `packs/<pack>/<skill-id>/SKILL.md`.
 - `core` is installed for every project.
 - Domain packs such as `flutter` are installed as needed.
+- Installing the `planning` pack creates `.agent-plans/` with an index and reusable plan/spec/ADR templates.
 - Installed skills are flattened into `.agents/skills/<skill-id>` and pinned through `.agents/skills.lock.json`.
 - Claude Code receives `.claude/skills` plus `CLAUDE.md`.
 - Gemini receives `GEMINI.md` plus `.agents/skills`.
@@ -56,6 +57,7 @@ The MCP stdio server exposes:
 Current V1 packs:
 
 - `ai`
+- `planning`
 - `code`
 - `flutter`
 - `kotlin`
@@ -70,6 +72,25 @@ Current V1 packs:
 - `data`
 - `ml`
 - `creative`
+
+## Planning Workspace
+
+When installed with `--packs planning`, Agent Skill Vault creates:
+
+```text
+.agent-plans/
+  README.md
+  INDEX.md
+  active/
+  archived/
+  decisions/
+  templates/
+    PLAN_TEMPLATE.md
+    SPEC_TEMPLATE.md
+    ADR_TEMPLATE.md
+```
+
+Use this folder to evolve project plans over time, create new plans from existing ones, and preserve decision history across sessions.
 
 GitHub-backed MCP config shape:
 

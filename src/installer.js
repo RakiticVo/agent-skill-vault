@@ -41,6 +41,40 @@ async function writeBootstrap(projectDir, targets) {
   }
 }
 
+async function writeIfMissing(filePath, content) {
+  if (await pathExists(filePath)) return false;
+  await ensureDir(path.dirname(filePath));
+  await fs.writeFile(filePath, content);
+  return true;
+}
+
+async function writePlanningWorkspace(projectDir) {
+  const planDir = path.join(projectDir, '.agent-plans');
+  const files = [
+    ['README.md', 'PLAN_README.md'],
+    ['INDEX.md', 'PLAN_INDEX.md'],
+    [path.join('templates', 'PLAN_TEMPLATE.md'), 'PLAN_TEMPLATE.md'],
+    [path.join('templates', 'SPEC_TEMPLATE.md'), 'SPEC_TEMPLATE.md'],
+    [path.join('templates', 'ADR_TEMPLATE.md'), 'ADR_TEMPLATE.md']
+  ];
+
+  const created = [];
+  await ensureDir(path.join(planDir, 'active'));
+  await ensureDir(path.join(planDir, 'archived'));
+  await ensureDir(path.join(planDir, 'decisions'));
+  await ensureDir(path.join(planDir, 'templates'));
+
+  for (const [relativePath, templateName] of files) {
+    const content = await fs.readFile(path.join(templatesRoot, templateName), 'utf8');
+    const target = path.join(planDir, relativePath);
+    if (await writeIfMissing(target, content)) {
+      created.push(path.relative(projectDir, target));
+    }
+  }
+
+  return created;
+}
+
 export async function installSkills({ projectDir, targets = ['codex', 'claude', 'gemini'], packs = ['flutter'], version = 'v0.1.0', requestedSkills = ['all'], sourceRepo = 'local' }) {
   const absoluteProject = path.resolve(projectDir);
   const source = await resolveSkillSource({ sourceRepo, version });
@@ -60,6 +94,7 @@ export async function installSkills({ projectDir, targets = ['codex', 'claude', 
     }
 
     await writeBootstrap(absoluteProject, uniqueTargets);
+    const planningFiles = installedPacks.includes('planning') ? await writePlanningWorkspace(absoluteProject) : [];
 
     const copiedFiles = [];
     for (const target of uniqueTargets) {
@@ -85,6 +120,7 @@ export async function installSkills({ projectDir, targets = ['codex', 'claude', 
       installedPacks,
       installed: selected,
       targets: uniqueTargets,
+      planningFiles,
       lockFile: path.join(absoluteProject, '.agents', 'skills.lock.json')
     };
   } finally {
