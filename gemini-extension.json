@@ -1,0 +1,6 @@
+{
+  "name": "agent-skill-hub",
+  "description": "Multi-domain agent skills, pack installation, bootstrap, and doctor workflow",
+  "version": "0.1.0",
+  "contextFileName": "GEMINI.md"
+}
