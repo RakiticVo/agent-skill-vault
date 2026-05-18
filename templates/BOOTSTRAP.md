@@ -1,4 +1,4 @@
-# Agent Skill Hub Bootstrap
+# Agent Skill Vault Bootstrap
 
 This project uses pinned agent skills. These instructions are mandatory for every coding agent session.
 

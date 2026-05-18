@@ -11,9 +11,9 @@ test('parses github shortcut source', () => {
 });
 
 test('parses github https source', () => {
-  assert.deepEqual(parseGithubSource('https://github.com/owner/agent-skill-hub.git#main'), {
+  assert.deepEqual(parseGithubSource('https://github.com/owner/agent-skill-vault.git#main'), {
     owner: 'owner',
-    repo: 'agent-skill-hub',
+    repo: 'agent-skill-vault',
     ref: 'main'
   });
 });

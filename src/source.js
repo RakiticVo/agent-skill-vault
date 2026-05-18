@@ -41,7 +41,7 @@ async function downloadGithubTarball({ owner, repo, ref }) {
     throw new Error(`Failed to download ${owner}/${repo}@${ref}: ${response.status} ${response.statusText}`);
   }
 
-  const tempDir = await fs.mkdtemp(path.join(os.tmpdir(), 'agent-skill-hub-'));
+  const tempDir = await fs.mkdtemp(path.join(os.tmpdir(), 'agent-skill-vault-'));
   const archivePath = path.join(tempDir, 'source.tar.gz');
   await fs.writeFile(archivePath, Buffer.from(await response.arrayBuffer()));
   await execFileAsync('tar', ['-xzf', archivePath, '-C', tempDir]);

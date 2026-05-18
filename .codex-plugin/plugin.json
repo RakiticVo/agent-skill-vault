@@ -1,12 +1,12 @@
 {
-  "name": "agent-skill-hub",
+  "name": "agent-skill-vault",
   "version": "0.1.0",
   "description": "Multi-domain AI agent skills, installer, doctor, and MCP tools.",
   "author": {
     "name": "Personal"
   },
-  "homepage": "https://github.com/yourname/agent-skill-hub",
-  "repository": "https://github.com/yourname/agent-skill-hub",
+  "homepage": "https://github.com/RakiticVo/agent-skill-vault",
+  "repository": "https://github.com/RakiticVo/agent-skill-vault",
   "license": "MIT",
   "keywords": [
     "skills",
@@ -18,7 +18,7 @@
   ],
   "skills": "./packs/",
   "interface": {
-    "displayName": "Agent Skill Hub",
+    "displayName": "Agent Skill Vault",
     "shortDescription": "Multi-domain agent skill packs and MCP tools",
     "longDescription": "Use Agent Skill Hub to bootstrap projects with pinned agent skills, install Codex/Claude/Gemini bootstrap files, and run pack-specific convention checks.",
     "developerName": "Personal",
@@ -32,7 +32,7 @@
       "Bootstrap this project with Agent Skill Hub skills.",
       "Install core and domain skill packs for this project."
     ],
-    "websiteURL": "https://github.com/yourname/agent-skill-hub",
+    "websiteURL": "https://github.com/RakiticVo/agent-skill-vault",
     "brandColor": "#02569B",
     "screenshots": []
   }

@@ -1,4 +1,4 @@
-# Agent Skill Hub
+# Agent Skill Vault
 
 Use this repository as a multi-domain skill source and MCP server.
 

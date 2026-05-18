@@ -1,4 +1,4 @@
-# Agent Skill Hub
+# Agent Skill Vault
 
 This repo contains source skill packs and an MCP server for AI-assisted work across domains.
 

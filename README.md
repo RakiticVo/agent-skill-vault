@@ -1,4 +1,4 @@
-# Agent Skill Hub
+# Agent Skill Vault
 
 Multi-domain skill registry, installer, doctor, and MCP stdio server for AI agent workflows.
 
@@ -9,9 +9,9 @@ If an agent reaches this repository through GitHub MCP first, start with [INSTAL
 ```bash
 node ./bin/agent-skills.js list --pack all
 node ./bin/agent-skills.js list --pack ai,code,design,git,agents,mcp,research
-node ./bin/agent-skills.js list --source https://github.com/yourname/agent-skill-hub --version v0.1.0 --pack core,flutter
+node ./bin/agent-skills.js list --source https://github.com/RakiticVo/agent-skill-vault --version v0.1.0 --pack core,flutter
 node ./bin/agent-skills.js recommend-flutter-stack --size medium --flow standard
-node ./bin/agent-skills.js install --project /path/to/flutter_app --packs core,flutter --source https://github.com/yourname/agent-skill-hub --version v0.1.0 --targets codex,claude,gemini
+node ./bin/agent-skills.js install --project /path/to/flutter_app --packs core,flutter --source https://github.com/RakiticVo/agent-skill-vault --version v0.1.0 --targets codex,claude,gemini
 node ./bin/agent-skills.js doctor --project /path/to/flutter_app
 node ./bin/agent-skills.js update --project /path/to/flutter_app --version v0.2.0
 node ./bin/agent-skills.js mcp
@@ -71,18 +71,18 @@ GitHub-backed MCP config shape:
 ```json
 {
   "mcpServers": {
-    "agent-skill-hub": {
+    "agent-skill-vault": {
       "command": "npm",
       "args": [
         "exec",
         "--yes",
         "--package",
-        "github:yourname/agent-skill-hub",
+        "github:RakiticVo/agent-skill-vault",
         "--",
         "agent-skills",
         "mcp",
         "--source",
-        "https://github.com/yourname/agent-skill-hub",
+        "https://github.com/RakiticVo/agent-skill-vault",
         "--version",
         "v0.1.0"
       ]
@@ -95,11 +95,11 @@ GitHub-backed MCP config shape:
 
 1. Create or open a project.
 2. If Antigravity only has GitHub MCP, ask the agent to read `INSTALL_INSTRUCTIONS.md` from this repo.
-3. The agent registers the `agent-skill-hub` MCP server if Antigravity permits config edits/reload, or gives you the MCP config to paste.
+3. The agent registers the `agent-skill-vault` MCP server if Antigravity permits config edits/reload, or gives you the MCP config to paste.
 4. After the MCP server is available, ask the agent once:
 
 ```text
-Use agent-skill-hub MCP to bootstrap this Flutter project from https://github.com/yourname/agent-skill-hub at v0.1.0 with core and flutter packs for codex, claude, and gemini. Then run doctor.
+Use agent-skill-vault MCP to bootstrap this Flutter project from https://github.com/RakiticVo/agent-skill-vault at v0.1.0 with core and flutter packs for codex, claude, and gemini. Then run doctor.
 ```
 
 The installer writes `AGENTS.md`, `CLAUDE.md`, `GEMINI.md`, `.agents/skills`, `.claude/skills`, and `.agents/skills.lock.json` into the project.

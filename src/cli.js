@@ -29,7 +29,7 @@ function printJson(value) {
 }
 
 function help() {
-  return `Agent Skill Hub
+  return `Agent Skill Vault
 
 Usage:
   agent-skills list [--pack all|core,ai,code,flutter,kotlin,javascript,design,git,agents,mcp,research] [--source github:user/repo|https://github.com/user/repo] [--version v0.1.0]

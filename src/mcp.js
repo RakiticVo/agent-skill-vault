@@ -57,7 +57,7 @@ async function handle(request, impl) {
       result: {
         protocolVersion: '2024-11-05',
         capabilities: { tools: {} },
-        serverInfo: { name: 'agent-skill-hub', version: '0.1.0' }
+        serverInfo: { name: 'agent-skill-vault', version: '0.1.0' }
       }
     });
     return;

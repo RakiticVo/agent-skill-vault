@@ -1,5 +1,5 @@
 {
-  "name": "agent-skill-hub",
+  "name": "agent-skill-vault",
   "version": "0.1.0",
   "description": "Multi-domain AI agent skill registry, installer, doctor, and MCP stdio server.",
   "type": "module",
