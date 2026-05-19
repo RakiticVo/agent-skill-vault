@@ -1,6 +1,5 @@
 function send(message) {
-  const payload = JSON.stringify(message);
-  process.stdout.write(`Content-Length: ${Buffer.byteLength(payload, 'utf8')}\r\n\r\n${payload}`);
+  process.stdout.write(`${JSON.stringify(message)}\n`);
 }
 
 function tool(name, description, inputSchema) {
@@ -57,7 +56,7 @@ async function handle(request, impl) {
       result: {
         protocolVersion: '2024-11-05',
         capabilities: { tools: {} },
-        serverInfo: { name: 'agent-skill-vault', version: '0.1.0' }
+        serverInfo: { name: 'agent-skill-vault', version: '0.2.1' }
       }
     });
     return;

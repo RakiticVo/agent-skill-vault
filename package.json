@@ -1,6 +1,6 @@
 {
   "name": "agent-skill-vault",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "Multi-domain AI agent skill registry, installer, doctor, and MCP stdio server.",
   "type": "module",
   "bin": {
