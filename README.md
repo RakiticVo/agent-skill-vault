@@ -29,6 +29,7 @@ node ./bin/agent-skills.js doctor --project C:\tmp\skill-smoke
 
 - Source skills live in `packs/<pack>/<skill-id>/SKILL.md`.
 - `core` is installed for every project.
+- AgentMemory is a mandatory integration for every installed project; the installer adds `agents/agentmemory-integration`, `.agents/integrations/agentmemory.md`, and an MCP config example automatically.
 - Domain packs such as `flutter` are installed as needed.
 - Installing the `planning` pack creates `.agent-plans/` with an index and reusable plan/spec/ADR templates.
 - Installed skills are flattened into `.agents/skills/<skill-id>` and pinned through `.agents/skills.lock.json`.
@@ -72,6 +73,15 @@ Current V1 packs:
 - `data`
 - `ml`
 - `creative`
+
+## Skill Catalog
+
+For a quick overview of every pack and skill, see:
+
+- [English skill catalog](./docs/SKILL_CATALOG.en.md)
+- [Vietnamese skill catalog](./docs/SKILL_CATALOG.vi.md)
+
+These files are summaries only. The detailed operating rules remain in each `packs/<pack>/<skill-id>/SKILL.md`.
 
 ## Planning Workspace
 
@@ -130,6 +140,29 @@ Use agent-skill-vault MCP to bootstrap this Flutter project from https://github.
 
 The installer writes `AGENTS.md`, `CLAUDE.md`, `GEMINI.md`, `.agents/skills`, `.claude/skills`, and `.agents/skills.lock.json` into the project.
 
+## Mandatory AgentMemory
+
+Installed projects require AgentMemory as the shared memory layer for agents. By default, start the local memory server with:
+
+```bash
+npx @agentmemory/agentmemory
+```
+
+Then register an MCP server named `agentmemory` with:
+
+```json
+{
+  "mcpServers": {
+    "agentmemory": {
+      "command": "npx",
+      "args": ["-y", "@agentmemory/mcp"]
+    }
+  }
+}
+```
+
+The installer writes `.agents/integrations/agentmemory.mcp.example.json` into each target project. `doctor` reports missing integration files as errors and reports unavailable health checks with the exact setup command.
+
 ## Skill Authoring
 
 Each skill is a folder containing `SKILL.md` with YAML frontmatter:
@@ -149,3 +182,7 @@ checks:
 ```
 
 Keep mandatory rules backed by `doctor` checks where possible; do not rely only on instructions.
+
+## Credits and Inspirations
+
+Some skills are inspired by public agent workflow projects and documentation patterns. See [ATTRIBUTIONS.md](./ATTRIBUTIONS.md) for source credits.

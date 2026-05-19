@@ -13,6 +13,10 @@ const requiredDirs = [
   'test'
 ];
 const bootstrapFiles = ['AGENTS.md', 'CLAUDE.md', 'GEMINI.md'];
+const agentMemoryFiles = [
+  '.agents/integrations/agentmemory.md',
+  '.agents/integrations/agentmemory.mcp.example.json'
+];
 
 function normalizePacks(packs) {
   const values = Array.isArray(packs) ? packs : String(packs || '').split(',');
@@ -33,12 +37,13 @@ export async function runDoctor({ projectDir, packs }) {
   const issues = [];
   const warnings = [];
   let installedPacks = normalizePacks(packs);
+  let lock = null;
 
   const lockPath = path.join(root, '.agents', 'skills.lock.json');
   if (!(await pathExists(lockPath))) {
     issues.push({ code: 'missing_skill_lock', message: 'Missing .agents/skills.lock.json. Run install first.' });
   } else {
-    const lock = await readJson(lockPath);
+    lock = await readJson(lockPath);
     installedPacks = installedPacks.length ? installedPacks : lock.installedPacks || ['flutter'];
     if (!lock.version || !String(lock.version).startsWith('v')) {
       issues.push({ code: 'unpinned_version', message: 'Skill version must be pinned to a semver tag like v0.1.0.' });
@@ -48,6 +53,39 @@ export async function runDoctor({ projectDir, packs }) {
   for (const file of bootstrapFiles) {
     if (!(await pathExists(path.join(root, file)))) {
       warnings.push({ code: 'missing_bootstrap', message: `Missing ${file}; this agent may skip skill selection.` });
+    }
+  }
+
+  if (lock?.requiredIntegrations?.includes('agentmemory') || lock?.agentMemory?.required) {
+    for (const file of agentMemoryFiles) {
+      if (!(await pathExists(path.join(root, file)))) {
+        issues.push({
+          code: 'missing_agentmemory_integration',
+          message: `Missing required AgentMemory integration file: ${file}. Run install again, start AgentMemory with "npx @agentmemory/agentmemory", and add the agentmemory MCP config to your host.`
+        });
+      }
+    }
+
+    try {
+      const controller = new AbortController();
+      const timeout = setTimeout(() => controller.abort(), 1000);
+      let response;
+      try {
+        response = await fetch('http://localhost:3111/agentmemory/health', { signal: controller.signal });
+      } finally {
+        clearTimeout(timeout);
+      }
+      if (!response.ok) {
+        warnings.push({
+          code: 'agentmemory_health_unavailable',
+          message: 'AgentMemory health endpoint did not return OK. Start it with "npx @agentmemory/agentmemory" and ensure the agentmemory MCP config uses "npx -y @agentmemory/mcp".'
+        });
+      }
+    } catch {
+      warnings.push({
+        code: 'agentmemory_health_unavailable',
+        message: 'Could not verify AgentMemory at http://localhost:3111/agentmemory/health. Start it with "npx @agentmemory/agentmemory" and add the agentmemory MCP config to your host if it is not already registered.'
+      });
     }
   }
 

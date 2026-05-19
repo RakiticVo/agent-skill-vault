@@ -15,6 +15,7 @@ checks:
   - tasks have acceptance criteria
   - tasks have verification steps
   - dependencies and checkpoints are identified
+  - tasks are small enough to implement and verify independently
 ---
 
 # Planning And Task Breakdown
@@ -45,3 +46,6 @@ Planning rules:
 - Add checkpoints after every 2-3 tasks.
 - Mark high-risk work early so it fails fast.
 - Break down any task that touches unrelated subsystems or cannot fit in one focused session.
+- Order tasks so each completed step leaves the project in a coherent state.
+- Include explicit handoff notes when a task can be delegated to another agent.
+- Split tasks that require different verification methods, such as unit tests, browser checks, or deployment smoke tests.

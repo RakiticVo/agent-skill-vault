@@ -13,6 +13,8 @@ checks:
   - description describes when to use the skill
   - skill includes concrete checks
   - mandatory rules are backed by doctor/test checks when possible
+source_inspired_by:
+  - mattpocock/skills/write-a-skill
 ---
 
 # Writing Skills
@@ -28,3 +30,11 @@ Rules:
 - Avoid domain claims that are broader than the skill can enforce.
 
 Before finishing a skill, test it against likely user tasks and failure modes.
+
+Skill quality checklist:
+
+- Trigger is specific enough that an agent knows when to use it.
+- Instructions are operational, not motivational.
+- Required checks are observable.
+- Extra references are loaded only when needed.
+- The skill does not hide side effects, broad permissions, or unrelated automation.

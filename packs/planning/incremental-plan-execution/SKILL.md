@@ -16,6 +16,7 @@ checks:
   - only one active task is changed at a time
   - status changes are recorded in the plan
   - verification evidence is captured
+  - each slice is rollback-friendly
 ---
 
 # Incremental Plan Execution
@@ -33,3 +34,11 @@ Cycle:
 - Update the next action.
 
 Do not continue implementing if the plan no longer matches reality. Update the plan first.
+
+Slice rules:
+
+- Prefer thin vertical slices that can be tested end-to-end.
+- Keep defaults safe and reversible.
+- Use feature flags or compatibility shims when rollout risk is high.
+- Commit or record a checkpoint after a verified slice when the workflow supports it.
+- If verification fails, record the failure before attempting the next fix.

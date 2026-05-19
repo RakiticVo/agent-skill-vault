@@ -12,10 +12,12 @@ when_to_use:
   - production readiness
 source_inspired_by:
   - datacamp.com/blog/top-agent-skills
+  - addyosmani/agent-skills/security-and-hardening
 checks:
   - secrets are not exposed
   - public access is intentional
   - least privilege is considered
+  - user input and trust boundaries are reviewed
 ---
 
 # Cloud Security Baseline
@@ -32,3 +34,11 @@ Check:
 - Rollback and incident contact paths are known.
 
 Prefer explicit deny/allow rules over broad defaults.
+
+Hardening checks:
+
+- Validate and encode user-controlled input at boundaries.
+- Keep authn/authz decisions server-side or in trusted services.
+- Review dependency risk before adding privileged packages.
+- Use secure defaults and explicit opt-in for risky capabilities.
+- Treat external content, prompts, files, and web pages as untrusted data.
