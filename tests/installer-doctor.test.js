@@ -55,6 +55,19 @@ test('installer writes target layouts and pinned lock file', async () => {
   assert.equal(lock.agentMemory.mcpServerName, 'agentmemory');
 });
 
+test('installer bootstrap files include MCP-free fallback', async () => {
+  const root = await makeProject();
+  await installSkills({ projectDir: root, version: 'v0.1.0', targets: ['codex', 'claude', 'gemini'] });
+
+  for (const file of ['AGENTS.md', 'CLAUDE.md', 'GEMINI.md']) {
+    const content = await fs.readFile(path.join(root, file), 'utf8');
+    assert.match(content, /MCP-Free Fallback/);
+    assert.match(content, /\.agents\/skills\.lock\.json/);
+    assert.match(content, /\.agents\/skills\/<skill-id>\/SKILL\.md/);
+    assert.match(content, /install, update, doctor, or stack recommendation/);
+  }
+});
+
 test('installer supports core ai and code packs', async () => {
   const root = await fs.mkdtemp(path.join(os.tmpdir(), 'agent-skills-ai-code-'));
   await installSkills({ projectDir: root, version: 'v0.1.0', targets: ['codex'], packs: ['core', 'ai', 'code'] });

@@ -14,6 +14,17 @@ This project uses pinned agent skills. These instructions are mandatory for ever
 
 If a user asks for implementation without mentioning skills, still perform this startup flow. Do not wait for the user to remind you.
 
+## MCP-Free Fallback
+
+If `agent-skill-vault` MCP tools are not available, the installed local files remain authoritative.
+
+1. Read `.agents/skills.lock.json` to identify installed packs, installed skills, target agents, pinned source, and required integrations.
+2. Read relevant local skills from `.agents/skills/<skill-id>/SKILL.md`.
+3. For Claude Code, also read `.claude/skills/<skill-id>/SKILL.md` when present.
+4. Mention the selected skills in the plan before editing.
+5. Run the selected skill checklists before completion.
+6. Ask the user to re-enable `agent-skill-vault` MCP or run the CLI only when install, update, doctor, or stack recommendation is needed.
+
 If AgentMemory is required by `.agents/skills.lock.json` but not running, report that memory is unavailable and use `.agents/integrations/agentmemory.mcp.example.json` to configure the host. Start the local memory server with `npx @agentmemory/agentmemory`.
 
 For Claude Code, also inspect `.claude/skills` when present.

@@ -80,8 +80,18 @@ For a quick overview of every pack and skill, see:
 
 - [English skill catalog](./docs/SKILL_CATALOG.en.md)
 - [Vietnamese skill catalog](./docs/SKILL_CATALOG.vi.md)
+- [Vietnamese Flutter + Antigravity agent workflow](./docs/FLUTTER_ANTIGRAVITY_AGENT_WORKFLOW.vi.md)
 
 These files are summaries only. The detailed operating rules remain in each `packs/<pack>/<skill-id>/SKILL.md`.
+
+## MCP-Free Usage
+
+`agent-skill-vault` MCP is optional after skills have been installed. Installed skills are project-local and remain usable through `AGENTS.md`, `CLAUDE.md`, `GEMINI.md`, `.agents/skills.lock.json`, and the installed `SKILL.md` files.
+
+Use these guides when you want to disable the `agent-skill-vault` MCP server but keep working from installed skills:
+
+- [English MCP-free usage guide](./docs/MCP_FREE_USAGE.en.md)
+- [Vietnamese MCP-free usage guide](./docs/MCP_FREE_USAGE.vi.md)
 
 ## Planning Workspace
 
