@@ -22,3 +22,17 @@ Agent Skill Vault contains original skill content adapted from public ideas, wor
 - Author: Matt Pocock
 - License: MIT
 - Usage: Referenced for planning, PRD, issue workflow, handoff, architecture review, prototype, and git safety workflows. Related skills in Agent Skill Vault are adapted and rewritten, not copied verbatim.
+
+## obra/superpowers
+
+- Repository: https://github.com/obra/superpowers
+- Author: Jesse Vincent and contributors
+- License: See upstream repository.
+- Usage: Referenced for composable agent methodology, skill-first workflows, and subagent-oriented development patterns. Related skills in Agent Skill Vault are adapted and rewritten, not copied verbatim.
+
+## dair-ai/Prompt-Engineering-Guide
+
+- Repository: https://github.com/dair-ai/Prompt-Engineering-Guide
+- Author: DAIR.AI and contributors
+- License: See upstream repository.
+- Usage: Referenced for prompt engineering, context engineering, RAG, and agent prompting concepts. Related skills in Agent Skill Vault are adapted and rewritten, not copied verbatim.

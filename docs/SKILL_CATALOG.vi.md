@@ -1,6 +1,6 @@
 # Danh mục Skill của Agent Skill Vault
 
-Agent Skill Vault hiện có **17 pack** và **105 skill**. File này là bản overview dễ đọc; từng file `SKILL.md` được link bên dưới vẫn là nguồn chính cho rule, checklist và trigger sử dụng.
+Agent Skill Vault hiện có **17 pack** và **111 skill**. File này là bản overview dễ đọc; từng file `SKILL.md` được link bên dưới vẫn là nguồn chính cho rule, checklist và trigger sử dụng.
 
 ## Cách Đọc Catalog
 
@@ -22,8 +22,8 @@ Agent Skill Vault hiện có **17 pack** và **105 skill**. File này là bản 
 
 ## Mục Lục
 
-- [Agents](#agents) (10 skill)
-- [AI](#ai) (7 skill)
+- [Agents](#agents) (11 skill)
+- [AI](#ai) (8 skill)
 - [Code](#code) (11 skill)
 - [Core](#core) (4 skill)
 - [Creative](#creative) (2 skill)
@@ -32,9 +32,9 @@ Agent Skill Vault hiện có **17 pack** và **105 skill**. File này là bản 
 - [DevOps](#devops) (4 skill)
 - [Flutter](#flutter) (7 skill)
 - [Git](#git) (9 skill)
-- [JavaScript](#javascript) (8 skill)
+- [JavaScript](#javascript) (11 skill)
 - [Kotlin](#kotlin) (5 skill)
-- [MCP](#mcp) (4 skill)
+- [MCP](#mcp) (5 skill)
 - [ML](#ml) (1 skill)
 - [Planning](#planning) (12 skill)
 - [Research](#research) (9 skill)
@@ -427,6 +427,27 @@ Research có nguồn, phân tích repo, context packing, synthesis và monitorin
 ## Security
 
 Review security cho cloud, secrets, prompt injection và third-party skills.
+
+## Recent Additions
+
+- **[conversation-state-capture](../packs/agents/conversation-state-capture/SKILL.md)**
+  - Trang thai: Optional
+  - Dung de lam gi: Luu cac quyet dinh hoi thoai ben vung vao memory, plan, ADR, issue tracker hoac handoff ma khong luu ca lich su chat on ao.
+- **[token-efficient-prompting](../packs/ai/token-efficient-prompting/SKILL.md)**
+  - Trang thai: Optional
+  - Dung de lam gi: Giam chi phi prompt va quota bang cach nen context nhung van giu yeu cau quan trong cho quyet dinh.
+- **[frontend-ui-engineering](../packs/javascript/frontend-ui-engineering/SKILL.md)**
+  - Trang thai: Optional
+  - Dung de lam gi: Xay dung va review UI JavaScript ve layout, interaction, accessibility, responsive behavior va visual polish.
+- **[nodejs-production-backend](../packs/javascript/nodejs-production-backend/SKILL.md)**
+  - Trang thai: Optional
+  - Dung de lam gi: Trien khai va review backend Node.js production ve validation, service boundary, error, observability va deploy-safe change.
+- **[nextjs-fullstack-architecture](../packs/javascript/nextjs-fullstack-architecture/SKILL.md)**
+  - Trang thai: Optional
+  - Dung de lam gi: Dat React UI, Server Components, Server Actions, Route Handlers, middleware, cache, auth, database access va backend logic dung boundary trong Next.js.
+- **[mcp-context-routing](../packs/mcp/mcp-context-routing/SKILL.md)**
+  - Trang thai: Optional
+  - Dung de lam gi: Chon giua MCP tool, local file, memory, connector, web search va direct prompt de lay context hieu qua.
 
 - **[cloud-security-baseline](../packs/security/cloud-security-baseline/SKILL.md)**
   - Trạng thái: Optional

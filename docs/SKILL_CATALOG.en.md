@@ -1,6 +1,6 @@
 # Agent Skill Vault Skill Catalog
 
-Agent Skill Vault currently contains **17 packs** and **105 skills**. This catalog is the readable overview; each linked `SKILL.md` remains the source of truth for operating rules, checks, and usage triggers.
+Agent Skill Vault currently contains **17 packs** and **111 skills**. This catalog is the readable overview; each linked `SKILL.md` remains the source of truth for operating rules, checks, and usage triggers.
 
 ## How To Read This Catalog
 
@@ -22,8 +22,8 @@ Agent Skill Vault currently contains **17 packs** and **105 skills**. This catal
 
 ## Table Of Contents
 
-- [Agents](#agents) (10 skills)
-- [AI](#ai) (7 skills)
+- [Agents](#agents) (11 skills)
+- [AI](#ai) (8 skills)
 - [Code](#code) (11 skills)
 - [Core](#core) (4 skills)
 - [Creative](#creative) (2 skills)
@@ -32,9 +32,9 @@ Agent Skill Vault currently contains **17 packs** and **105 skills**. This catal
 - [DevOps](#devops) (4 skills)
 - [Flutter](#flutter) (7 skills)
 - [Git](#git) (9 skills)
-- [JavaScript](#javascript) (8 skills)
+- [JavaScript](#javascript) (11 skills)
 - [Kotlin](#kotlin) (5 skills)
-- [MCP](#mcp) (4 skills)
+- [MCP](#mcp) (5 skills)
 - [ML](#ml) (1 skill)
 - [Planning](#planning) (12 skills)
 - [Research](#research) (9 skills)
@@ -59,6 +59,9 @@ Agent runtime, memory, orchestration, role routing, and completion discipline.
 - **[context-engineering](../packs/agents/context-engineering/SKILL.md)**
   - Status: Optional
   - Helps with: Prepares the right instructions, files, docs, memory, and tools before agent work starts or resumes.
+- **[conversation-state-capture](../packs/agents/conversation-state-capture/SKILL.md)**
+  - Status: Optional
+  - Helps with: Preserves durable conversation decisions in memory, plans, ADRs, issue trackers, or handoff notes without storing noisy chat history.
 - **[handoff](../packs/agents/handoff/SKILL.md)**
   - Status: Optional
   - Helps with: Summarizes session state so another agent or future session can continue safely.
@@ -91,6 +94,9 @@ Thinking workflows for reasoning, brainstorming, planning, research, writing, an
 - **[prompt-engineering](../packs/ai/prompt-engineering/SKILL.md)**
   - Status: Optional
   - Helps with: Designs prompts, agent instructions, eval prompts, and reusable task templates.
+- **[token-efficient-prompting](../packs/ai/token-efficient-prompting/SKILL.md)**
+  - Status: Optional
+  - Helps with: Reduces prompt cost and quota use by compressing context while preserving decision-critical requirements.
 - **[reasoning-before-action](../packs/ai/reasoning-before-action/SKILL.md)**
   - Status: Optional
   - Helps with: Surfaces assumptions, tradeoffs, and success criteria before risky work.
@@ -286,9 +292,15 @@ Next.js, React, Node.js, TypeScript, API design, testing, and performance.
 - **[browser-testing-with-devtools](../packs/javascript/browser-testing-with-devtools/SKILL.md)**
   - Status: Optional
   - Helps with: Validates browser UI with DevTools, automation, console logs, network traces, and runtime inspection.
+- **[frontend-ui-engineering](../packs/javascript/frontend-ui-engineering/SKILL.md)**
+  - Status: Optional
+  - Helps with: Builds and reviews frontend JavaScript UI for layout, interaction, accessibility, responsive behavior, and visual polish.
 - **[nextjs-frontend-architecture](../packs/javascript/nextjs-frontend-architecture/SKILL.md)**
   - Status: Optional
   - Helps with: Structures Next.js routes, components, server/client boundaries, and data loading.
+- **[nextjs-fullstack-architecture](../packs/javascript/nextjs-fullstack-architecture/SKILL.md)**
+  - Status: Optional
+  - Helps with: Places React UI, Server Components, Server Actions, Route Handlers, middleware, caching, auth, database access, and backend logic behind clear Next.js boundaries.
 - **[nextjs-performance](../packs/javascript/nextjs-performance/SKILL.md)**
   - Status: Optional
   - Helps with: Optimizes Next.js rendering, bundle size, data loading, and caching.
@@ -298,6 +310,9 @@ Next.js, React, Node.js, TypeScript, API design, testing, and performance.
 - **[nodejs-backend-architecture](../packs/javascript/nodejs-backend-architecture/SKILL.md)**
   - Status: Optional
   - Helps with: Designs Node.js services, backend modules, dependencies, and server-side structure.
+- **[nodejs-production-backend](../packs/javascript/nodejs-production-backend/SKILL.md)**
+  - Status: Optional
+  - Helps with: Implements and reviews production Node.js backend behavior, validation, service boundaries, errors, observability, and deploy-safe changes.
 - **[react-component-design](../packs/javascript/react-component-design/SKILL.md)**
   - Status: Optional
   - Helps with: Designs React components, props, composition patterns, and reusable UI modules.
@@ -332,6 +347,9 @@ MCP bootstrap, tool design, registry discovery, and security review.
 - **[mcp-registry-discovery](../packs/mcp/mcp-registry-discovery/SKILL.md)**
   - Status: Optional
   - Helps with: Finds existing MCP servers, agent skills, and tool ecosystems before building new automation.
+- **[mcp-context-routing](../packs/mcp/mcp-context-routing/SKILL.md)**
+  - Status: Optional
+  - Helps with: Chooses between MCP tools, local files, memory, connectors, web search, and direct prompting to gather context efficiently.
 - **[mcp-security-review](../packs/mcp/mcp-security-review/SKILL.md)**
   - Status: Optional
   - Helps with: Reviews MCP servers, local commands, permissions, secrets, and destructive tool risks.

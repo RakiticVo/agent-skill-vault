@@ -46,7 +46,7 @@ Re-enable `agent-skill-vault` MCP when the project needs one of these actions:
 If MCP is disabled but the CLI is available, the same maintenance actions can be run from the terminal:
 
 ```bash
-npx github:RakiticVo/agent-skill-vault#v0.2.1 agent-skills doctor --project .
+npx github:RakiticVo/agent-skill-vault#v0.3.0 agent-skills doctor --project .
 ```
 
 ## AgentMemory Is Separate
@@ -81,4 +81,3 @@ Do not delete these files unless you intentionally want to remove the installed 
 - `CLAUDE.md`
 - `GEMINI.md`
 - `.agents/integrations`
-

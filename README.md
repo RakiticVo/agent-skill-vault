@@ -13,7 +13,7 @@ node ./bin/agent-skills.js list --source https://github.com/RakiticVo/agent-skil
 node ./bin/agent-skills.js recommend-flutter-stack --size medium --flow standard
 node ./bin/agent-skills.js install --project /path/to/flutter_app --packs core,flutter --source https://github.com/RakiticVo/agent-skill-vault --version v0.1.0 --targets codex,claude,gemini
 node ./bin/agent-skills.js doctor --project /path/to/flutter_app
-node ./bin/agent-skills.js update --project /path/to/flutter_app --version v0.2.0
+node ./bin/agent-skills.js update --project /path/to/flutter_app --version v0.3.0
 node ./bin/agent-skills.js mcp
 ```
 
@@ -38,7 +38,7 @@ node ./bin/agent-skills.js doctor --project C:\tmp\skill-smoke
 
 ## Versioning
 
-Create Git tags such as `v0.1.0`, `v0.2.0`, and install using `--version`. This keeps each project stable until you intentionally update skills.
+Create Git tags such as `v0.1.0`, `v0.3.0`, and install using `--version`. This keeps each project stable until you intentionally update skills.
 
 ```bash
 git tag v0.1.0

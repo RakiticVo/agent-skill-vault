@@ -2,7 +2,7 @@
 
 File này hướng dẫn cách để **Antigravity agents làm việc với `agent-skill-vault` qua MCP** khi bắt đầu một Flutter project mới. Mục tiêu là để agent tự dùng MCP tools nhiều nhất có thể, thay vì bạn phải copy skill thủ công.
 
-Version khuyến nghị hiện tại: `v0.2.1`.
+Version khuyến nghị hiện tại: `v0.3.0`.
 
 ## Nguyên Tắc Chính
 
@@ -25,14 +25,14 @@ Trước khi agent có thể gọi tools, Antigravity cần MCP config cho `agen
         "exec",
         "--yes",
         "--package",
-        "github:RakiticVo/agent-skill-vault#v0.2.1",
+        "github:RakiticVo/agent-skill-vault#v0.3.0",
         "--",
         "agent-skills",
         "mcp",
         "--source",
         "https://github.com/RakiticVo/agent-skill-vault",
         "--version",
-        "v0.2.1"
+        "v0.3.0"
       ]
     }
   }
@@ -73,12 +73,12 @@ This is a new Flutter project, but requirements and use cases are not defined ye
 
 1. Call list_skills with:
    - sourceRepo: https://github.com/RakiticVo/agent-skill-vault
-   - version: v0.2.1
+   - version: v0.3.0
    - packs: all
 
 2. Call install_skills for the current project directory with:
    - sourceRepo: https://github.com/RakiticVo/agent-skill-vault
-   - version: v0.2.1
+   - version: v0.3.0
    - packs: core,planning,ai,agents,research,git,mcp
    - targets: codex,claude,gemini
 
@@ -144,7 +144,7 @@ Do the Flutter setup phase for the current project.
 2. Call install_skills with:
    - projectDir: current project directory
    - sourceRepo: https://github.com/RakiticVo/agent-skill-vault
-   - version: v0.2.1
+   - version: v0.3.0
    - packs: core,planning,ai,code,flutter,design,git,agents,mcp,research,security
    - targets: codex,claude,gemini
 
@@ -296,18 +296,18 @@ Nếu cài Flutter pack quá sớm, agent có thể chọn state management, pac
 
 ### MCP initialize báo `invalid character 'C' looking for beginning of value`
 
-Nguyên nhân thường là dùng tag cũ `v0.2.0`. Hãy dùng `v0.2.1`:
+Nguyên nhân thường là dùng tag cũ `v0.2.0`. Hãy dùng `v0.3.0`:
 
 ```json
 "--package",
-"github:RakiticVo/agent-skill-vault#v0.2.1"
+"github:RakiticVo/agent-skill-vault#v0.3.0"
 ```
 
 Và:
 
 ```json
 "--version",
-"v0.2.1"
+"v0.3.0"
 ```
 
 ### Agent không thấy tool `install_skills`
@@ -315,7 +315,7 @@ Và:
 - Reload MCP servers.
 - Kiểm tra config `agent-skill-vault`.
 - Đảm bảo `npm` chạy được trong môi trường Antigravity.
-- Đảm bảo config dùng `github:RakiticVo/agent-skill-vault#v0.2.1`.
+- Đảm bảo config dùng `github:RakiticVo/agent-skill-vault#v0.3.0`.
 
 ### Doctor báo AgentMemory chưa chạy
 
