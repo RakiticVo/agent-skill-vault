@@ -11,7 +11,8 @@ Antigravity has GitHub MCP
 -> Agent registers the agent-skill-vault MCP server from this file
 -> Antigravity reloads/starts that MCP server
 -> Agent sees install_skills/recommend_flutter_stack/doctor
--> Agent calls install_skills in the current project
+-> Agent calls install_skills for a lean context bootstrap in the current project
+-> Agent reads the project spec and installs extra domain skills only when needed
 ```
 
 ## What GitHub MCP Can and Cannot Do
@@ -45,7 +46,7 @@ Replace `https://github.com/RakiticVo/agent-skill-vault` with the actual reposit
         "--source",
         "https://github.com/RakiticVo/agent-skill-vault",
         "--version",
-        "v0.1.0"
+        "v0.4.0"
       ]
     }
   }
@@ -62,25 +63,45 @@ When working in a new project:
 2. If it does not exist, ensure the `agent-skill-vault` MCP server above is registered.
 3. If Antigravity allows editing MCP config, add the config and reload/start MCP servers.
 4. If Antigravity does not allow editing MCP config, show the config to the user and ask them to paste it.
-5. After the MCP server is available, call `install_skills`.
+5. After the MCP server is available, call `install_skills` with a lean context bootstrap.
 
-For a Flutter project:
+For initial project context, do not install all Flutter, JavaScript, or other domain packs yet. Install only the skills needed to understand the project, preserve context, write/read specs, use MCP efficiently, and save quota:
 
 ```json
 {
   "projectDir": ".",
   "sourceRepo": "https://github.com/RakiticVo/agent-skill-vault",
-  "version": "v0.1.0",
-  "packs": ["core", "flutter"],
+  "version": "v0.4.0",
+  "packs": ["planning", "ai", "agents", "mcp", "research"],
   "targets": ["codex", "claude", "gemini"],
-  "requestedSkills": ["all"]
+  "requestedSkills": [
+    "using-agent-skills",
+    "context-engineering",
+    "conversation-state-capture",
+    "handoff",
+    "memory-hygiene",
+    "mcp-context-routing",
+    "mcp-registry-discovery",
+    "token-efficient-prompting",
+    "prompt-engineering",
+    "source-grounded-research",
+    "repo-research",
+    "context-packing",
+    "spec-driven-planning",
+    "planning-and-task-breakdown",
+    "project-plan-ledger",
+    "decision-log-and-adrs",
+    "agentmemory-integration"
+  ]
 }
 ```
 
 6. Call `doctor` for the current project.
-7. For future tasks, read `AGENTS.md`, `CLAUDE.md`, `GEMINI.md`, and the installed skill files before planning or editing.
+7. Create or read the initial project spec.
+8. After the spec exists, install only the additional skills required by that spec. See `docs/SKILL_SELECTION_PROMPTS.vi.md` for prompt templates.
+9. For future tasks, read `AGENTS.md`, `CLAUDE.md`, `GEMINI.md`, and the installed skill files before planning or editing.
 
-For broader projects, add packs such as `planning`, `ai`, `code`, `design`, `git`, `agents`, `mcp`, `research`, `security`, `devops`, `data`, `ml`, `creative`, `kotlin`, or `javascript`.
+For broader projects, add packs such as `code`, `design`, `git`, `security`, `devops`, `data`, `ml`, `creative`, `kotlin`, `javascript`, or `flutter` only after the spec makes them relevant. Prefer `requestedSkills` with explicit skill IDs over `requestedSkills: ["all"]`.
 
 ## Remote Alternative
 

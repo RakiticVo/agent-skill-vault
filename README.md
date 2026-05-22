@@ -9,11 +9,11 @@ If an agent reaches this repository through GitHub MCP first, start with [INSTAL
 ```bash
 node ./bin/agent-skills.js list --pack all
 node ./bin/agent-skills.js list --pack planning,ai,code,design,git,agents,mcp,research,security,devops,data,ml,creative
-node ./bin/agent-skills.js list --source https://github.com/RakiticVo/agent-skill-vault --version v0.1.0 --pack core,flutter
+node ./bin/agent-skills.js list --source https://github.com/RakiticVo/agent-skill-vault --version v0.4.0 --pack planning,ai,agents,mcp,research
 node ./bin/agent-skills.js recommend-flutter-stack --size medium --flow standard
-node ./bin/agent-skills.js install --project /path/to/flutter_app --packs core,flutter --source https://github.com/RakiticVo/agent-skill-vault --version v0.1.0 --targets codex,claude,gemini
+node ./bin/agent-skills.js install --project /path/to/project --source https://github.com/RakiticVo/agent-skill-vault --version v0.4.0 --targets codex,claude,gemini
 node ./bin/agent-skills.js doctor --project /path/to/flutter_app
-node ./bin/agent-skills.js update --project /path/to/flutter_app --version v0.3.0
+node ./bin/agent-skills.js update --project /path/to/flutter_app --version v0.4.0
 node ./bin/agent-skills.js mcp
 ```
 
@@ -38,11 +38,11 @@ node ./bin/agent-skills.js doctor --project C:\tmp\skill-smoke
 
 ## Versioning
 
-Create Git tags such as `v0.1.0`, `v0.3.0`, and install using `--version`. This keeps each project stable until you intentionally update skills.
+Create Git tags such as `v0.4.0`, `v0.5.0`, and install using `--version`. This keeps each project stable until you intentionally update skills.
 
 ```bash
-git tag v0.1.0
-git push origin v0.1.0
+git tag v0.4.0
+git push origin v0.4.0
 ```
 
 ## MCP Tools
@@ -81,6 +81,7 @@ For a quick overview of every pack and skill, see:
 - [English skill catalog](./docs/SKILL_CATALOG.en.md)
 - [Vietnamese skill catalog](./docs/SKILL_CATALOG.vi.md)
 - [Vietnamese Flutter + Antigravity agent workflow](./docs/FLUTTER_ANTIGRAVITY_AGENT_WORKFLOW.vi.md)
+- [Vietnamese prompt guide for selecting skills after a project spec](./docs/SKILL_SELECTION_PROMPTS.vi.md)
 
 These files are summaries only. The detailed operating rules remain in each `packs/<pack>/<skill-id>/SKILL.md`.
 
@@ -130,7 +131,7 @@ GitHub-backed MCP config shape:
         "--source",
         "https://github.com/RakiticVo/agent-skill-vault",
         "--version",
-        "v0.1.0"
+        "v0.4.0"
       ]
     }
   }
@@ -145,7 +146,7 @@ GitHub-backed MCP config shape:
 4. After the MCP server is available, ask the agent once:
 
 ```text
-Use agent-skill-vault MCP to bootstrap this Flutter project from https://github.com/RakiticVo/agent-skill-vault at v0.1.0 with core and flutter packs for codex, claude, and gemini. Then run doctor.
+Use agent-skill-vault MCP to bootstrap this project from https://github.com/RakiticVo/agent-skill-vault at v0.4.0 for context-building only. Install the lean context skills first, run doctor, then propose additional domain skills after reading the project spec.
 ```
 
 The installer writes `AGENTS.md`, `CLAUDE.md`, `GEMINI.md`, `.agents/skills`, `.claude/skills`, and `.agents/skills.lock.json` into the project.
@@ -196,3 +197,4 @@ Keep mandatory rules backed by `doctor` checks where possible; do not rely only 
 ## Credits and Inspirations
 
 Some skills are inspired by public agent workflow projects and documentation patterns. See [ATTRIBUTIONS.md](./ATTRIBUTIONS.md) for source credits.
+

@@ -4,6 +4,27 @@ import { recommendStack } from './recommend.js';
 import { runDoctor } from './doctor.js';
 import { runMcpServer } from './mcp.js';
 
+const contextBootstrapPacks = ['planning', 'ai', 'agents', 'mcp', 'research'];
+const contextBootstrapSkills = [
+  'using-agent-skills',
+  'context-engineering',
+  'conversation-state-capture',
+  'handoff',
+  'memory-hygiene',
+  'mcp-context-routing',
+  'mcp-registry-discovery',
+  'token-efficient-prompting',
+  'prompt-engineering',
+  'source-grounded-research',
+  'repo-research',
+  'context-packing',
+  'spec-driven-planning',
+  'planning-and-task-breakdown',
+  'project-plan-ledger',
+  'decision-log-and-adrs',
+  'agentmemory-integration'
+];
+
 function parseArgs(argv) {
   const args = { _: [] };
   for (let i = 0; i < argv.length; i += 1) {
@@ -32,12 +53,14 @@ function help() {
   return `Agent Skill Vault
 
 Usage:
-  agent-skills list [--pack all|core,planning,ai,code,flutter,kotlin,javascript,design,git,agents,mcp,research,security,devops,data,ml,creative] [--source github:user/repo|https://github.com/user/repo] [--version v0.1.0]
+  agent-skills list [--pack all|core,planning,ai,code,flutter,kotlin,javascript,design,git,agents,mcp,research,security,devops,data,ml,creative] [--source github:user/repo|https://github.com/user/repo] [--version v0.4.0]
   agent-skills recommend-flutter-stack [--size small|medium|large] [--flow simple|standard|event-heavy] [--async simple|complex]
-  agent-skills install --project <path> [--packs core,planning,ai,code,security,devops] [--source github:user/repo|https://github.com/user/repo] [--targets codex,claude,gemini] [--version v0.1.0] [--skills all|name,name]
+  agent-skills install --project <path> [--packs core,planning,ai,code,security,devops] [--source github:user/repo|https://github.com/user/repo] [--targets codex,claude,gemini] [--version v0.4.0] [--skills all|name,name]
   agent-skills update --project <path> --version <vX.Y.Z>
   agent-skills doctor --project <path> [--packs flutter]
-  agent-skills mcp [--source github:user/repo|https://github.com/user/repo] [--version v0.1.0]
+  agent-skills mcp [--source github:user/repo|https://github.com/user/repo] [--version v0.4.0]
+
+Default install without --packs/--skills installs a lean context bootstrap set, not a full domain pack.
 `;
 }
 
@@ -51,7 +74,7 @@ export async function main(argv) {
   }
 
   if (command === 'list') {
-    printJson(await listSkills({ sourceRepo: args.source || 'local', version: args.version || 'v0.1.0', packs: args.pack || args.packs || 'all' }));
+    printJson(await listSkills({ sourceRepo: args.source || 'local', version: args.version || 'v0.4.0', packs: args.pack || args.packs || 'all' }));
     return;
   }
 
@@ -67,12 +90,14 @@ export async function main(argv) {
 
   if (command === 'install') {
     if (!args.project) throw new Error('Missing --project <path>.');
+    const hasPacks = Boolean(args.packs);
+    const hasSkills = Boolean(args.skills);
     const result = await installSkills({
       projectDir: args.project,
       targets: String(args.targets || 'codex,claude,gemini').split(',').map((x) => x.trim()).filter(Boolean),
-      packs: String(args.packs || 'flutter').split(',').map((x) => x.trim()).filter(Boolean),
-      version: args.version || 'v0.1.0',
-      requestedSkills: args.skills ? String(args.skills).split(',').map((x) => x.trim()) : ['all'],
+      packs: hasPacks ? String(args.packs).split(',').map((x) => x.trim()).filter(Boolean) : contextBootstrapPacks,
+      version: args.version || 'v0.4.0',
+      requestedSkills: hasSkills ? String(args.skills).split(',').map((x) => x.trim()) : (hasPacks ? ['all'] : contextBootstrapSkills),
       sourceRepo: args.source || 'local'
     });
     printJson(result);
@@ -94,10 +119,20 @@ export async function main(argv) {
 
   if (command === 'mcp') {
     await runMcpServer({
-      listSkills: (toolArgs = {}) => listSkills({ sourceRepo: toolArgs.sourceRepo || args.source || 'local', version: toolArgs.version || args.version || 'v0.1.0', packs: toolArgs.packs || 'all' }),
+      listSkills: (toolArgs = {}) => listSkills({ sourceRepo: toolArgs.sourceRepo || args.source || 'local', version: toolArgs.version || args.version || 'v0.4.0', packs: toolArgs.packs || 'all' }),
       loadSkillIndex,
       recommendFlutterStack: recommendStack,
-      installSkills: (toolArgs) => installSkills({ ...toolArgs, sourceRepo: toolArgs.sourceRepo || args.source || 'local', version: toolArgs.version || args.version || 'v0.1.0' }),
+      installSkills: (toolArgs) => {
+        const hasPacks = Boolean(toolArgs?.packs?.length);
+        const hasSkills = Boolean(toolArgs?.requestedSkills?.length);
+        return installSkills({
+          ...toolArgs,
+          packs: hasPacks ? toolArgs.packs : contextBootstrapPacks,
+          requestedSkills: hasSkills ? toolArgs.requestedSkills : (hasPacks ? ['all'] : contextBootstrapSkills),
+          sourceRepo: toolArgs.sourceRepo || args.source || 'local',
+          version: toolArgs.version || args.version || 'v0.4.0'
+        });
+      },
       updateSkills: (toolArgs) => updateSkills({ ...toolArgs, sourceRepo: toolArgs.sourceRepo || args.source }),
       runDoctor
     });

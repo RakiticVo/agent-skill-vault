@@ -46,7 +46,7 @@ Bật lại `agent-skill-vault` MCP khi project cần:
 Nếu MCP đang tắt nhưng CLI dùng được, có thể chạy maintenance bằng terminal:
 
 ```bash
-npx github:RakiticVo/agent-skill-vault#v0.3.0 agent-skills doctor --project .
+npx github:RakiticVo/agent-skill-vault#v0.4.0 agent-skills doctor --project .
 ```
 
 ## AgentMemory là phần riêng

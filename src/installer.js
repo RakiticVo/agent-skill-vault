@@ -145,7 +145,7 @@ Clone and self-host \`rohitg00/agentmemory\` only when you need to pin a commit,
   ];
 }
 
-export async function installSkills({ projectDir, targets = ['codex', 'claude', 'gemini'], packs = ['flutter'], version = 'v0.1.0', requestedSkills = ['all'], sourceRepo = 'local' }) {
+export async function installSkills({ projectDir, targets = ['codex', 'claude', 'gemini'], packs = ['flutter'], version = 'v0.4.0', requestedSkills = ['all'], sourceRepo = 'local' }) {
   const absoluteProject = path.resolve(projectDir);
   const source = await resolveSkillSource({ sourceRepo, version });
   try {
