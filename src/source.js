@@ -53,7 +53,7 @@ async function downloadGithubTarball({ owner, repo, ref }) {
   return path.join(tempDir, extracted.name);
 }
 
-export async function resolveSkillSource({ sourceRepo = 'local', version = 'v0.5.0' } = {}) {
+export async function resolveSkillSource({ sourceRepo = 'local', version = 'v0.6.0' } = {}) {
   const github = parseGithubSource(sourceRepo);
   if (!github) {
     return {

@@ -14,7 +14,7 @@ Do not install full domain packs yet. Install only the skills needed for project
 Call install_skills with:
 - projectDir: "."
 - sourceRepo: "https://github.com/RakiticVo/agent-skill-vault"
-- version: "v0.5.0"
+- version: "v0.6.0"
 - targets: ["codex", "claude", "gemini"]
 - packs: ["planning", "ai", "agents", "mcp", "research"]
 - requestedSkills:
@@ -34,7 +34,6 @@ Call install_skills with:
   - planning-and-task-breakdown
   - project-plan-ledger
   - decision-log-and-adrs
-  - agentmemory-integration
 
 Then run doctor and report the installed skills.
 ```
@@ -71,7 +70,7 @@ Use agent-skill-vault MCP to install the approved React + Next.js implementation
 Call install_skills with:
 - projectDir: "."
 - sourceRepo: "https://github.com/RakiticVo/agent-skill-vault"
-- version: "v0.5.0"
+- version: "v0.6.0"
 - targets: ["codex", "claude", "gemini"]
 - packs: ["javascript", "code", "design", "security", "git"]
 - requestedSkills:
@@ -122,5 +121,5 @@ If the spec is still uncertain, first run recommend_flutter_stack and explain th
 - Cài skill theo giai đoạn: context trước, domain sau, review/release khi gần cần.
 - Tránh `packs: ["flutter"]` hoặc `packs: ["javascript"]` với `requestedSkills: ["all"]` ở giai đoạn đầu.
 - Khi đã có skill local, yêu cầu agent đọc `.agents/skills.lock.json` và chỉ mở các `SKILL.md` liên quan.
-- Tóm tắt spec thành quyết định bền vững trong `.agent-plans/` hoặc AgentMemory thay vì dán lại toàn bộ cuộc trò chuyện.
+- Tóm tắt spec thành quyết định bền vững trong `.agent-plans/`, ADR, hoặc project docs thay vì dán lại toàn bộ cuộc trò chuyện.
 - Khi cần thêm skill, yêu cầu agent đề xuất danh sách trước rồi mới cài.

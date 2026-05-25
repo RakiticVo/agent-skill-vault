@@ -8,12 +8,11 @@ Start with `using-agent-skills` before any other skill. It is the mandatory rout
 
 1. Read `.agents/skills.lock.json`.
 2. Read `.agents/skills/using-agent-skills/SKILL.md` first.
-3. Check whether the `agentmemory` MCP server is available. If available, search memory for relevant project decisions before planning.
-4. Read the relevant `SKILL.md` files before planning or editing.
-5. State which skills are being applied in the implementation plan.
-6. Follow the selected skills' workflow and checks.
-7. Before finishing meaningful work, save durable decisions or verified project knowledge to AgentMemory when available.
-8. Run `agent-skills doctor --project .` before finishing when the tool is available.
+3. Read the relevant `SKILL.md` files before planning or editing.
+4. State which skills are being applied in the implementation plan.
+5. Follow the selected skills' workflow and checks.
+6. Save durable decisions or verified project knowledge to `.agent-plans/decisions/`, ADRs, or project docs when meaningful work changes project direction.
+7. Run `agent-skills doctor --project .` before finishing when the tool is available.
 
 If a user asks for implementation without mentioning skills, still perform this startup flow. Do not wait for the user to remind you.
 
@@ -52,8 +51,6 @@ If `agent-skill-vault` MCP tools are not available, the installed local files re
 4. Mention the selected skills in the plan before editing.
 5. Run the selected skill checklists before completion.
 6. Ask the user to re-enable `agent-skill-vault` MCP or run the CLI only when install, update, doctor, or stack recommendation is needed.
-
-If AgentMemory is required by `.agents/skills.lock.json` but not running, report that memory is unavailable and use `.agents/integrations/agentmemory.mcp.example.json` to configure the host. Start the local memory server with `npx @agentmemory/agentmemory`.
 
 For Claude Code, also inspect `.claude/skills` when present.
 For Gemini, treat this file and `.agents/skills` as the project skill source.

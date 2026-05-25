@@ -7,7 +7,6 @@ test('README links to attribution file', async () => {
   const readme = await fs.readFile('README.md', 'utf8');
   const attributions = await fs.readFile('ATTRIBUTIONS.md', 'utf8');
   assert.match(readme, /ATTRIBUTIONS\.md/);
-  assert.match(attributions, /rohitg00\/agentmemory/);
   assert.match(attributions, /addyosmani\/agent-skills/);
   assert.match(attributions, /mattpocock\/skills/);
 });

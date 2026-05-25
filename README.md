@@ -9,11 +9,11 @@ If an agent reaches this repository through GitHub MCP first, start with [INSTAL
 ```bash
 node ./bin/agent-skills.js list --pack all
 node ./bin/agent-skills.js list --pack planning,ai,code,design,git,agents,mcp,research,security,devops,data,ml,creative
-node ./bin/agent-skills.js list --source https://github.com/RakiticVo/agent-skill-vault --version v0.5.0 --pack planning,ai,agents,mcp,research
+node ./bin/agent-skills.js list --source https://github.com/RakiticVo/agent-skill-vault --version v0.6.0 --pack planning,ai,agents,mcp,research
 node ./bin/agent-skills.js recommend-flutter-stack --size medium --flow standard
-node ./bin/agent-skills.js install --project /path/to/project --source https://github.com/RakiticVo/agent-skill-vault --version v0.5.0 --targets codex,claude,gemini
+node ./bin/agent-skills.js install --project /path/to/project --source https://github.com/RakiticVo/agent-skill-vault --version v0.6.0 --targets codex,claude,gemini
 node ./bin/agent-skills.js doctor --project /path/to/flutter_app
-node ./bin/agent-skills.js update --project /path/to/flutter_app --version v0.5.0
+node ./bin/agent-skills.js update --project /path/to/flutter_app --version v0.6.0
 node ./bin/agent-skills.js mcp
 ```
 
@@ -29,7 +29,6 @@ node ./bin/agent-skills.js doctor --project C:\tmp\skill-smoke
 
 - Source skills live in `packs/<pack>/<skill-id>/SKILL.md`.
 - `core` is installed for every project.
-- AgentMemory is a mandatory integration for every installed project; the installer adds `agents/agentmemory-integration`, `.agents/integrations/agentmemory.md`, and an MCP config example automatically.
 - Domain packs such as `flutter` are installed as needed.
 - Installing the `planning` pack creates `.agent-plans/` with an index and reusable plan/spec/ADR templates.
 - Installed skills are flattened into `.agents/skills/<skill-id>` and pinned through `.agents/skills.lock.json`.
@@ -38,11 +37,11 @@ node ./bin/agent-skills.js doctor --project C:\tmp\skill-smoke
 
 ## Versioning
 
-Create Git tags such as `v0.5.0`, `v0.6.0`, and install using `--version`. This keeps each project stable until you intentionally update skills.
+Create Git tags such as `v0.6.0`, `v0.7.0`, and install using `--version`. This keeps each project stable until you intentionally update skills.
 
 ```bash
-git tag v0.5.0
-git push origin v0.5.0
+git tag v0.6.0
+git push origin v0.6.0
 ```
 
 ## MCP Tools
@@ -137,7 +136,7 @@ GitHub-backed MCP config shape:
         "--source",
         "https://github.com/RakiticVo/agent-skill-vault",
         "--version",
-        "v0.5.0"
+        "v0.6.0"
       ]
     }
   }
@@ -152,33 +151,10 @@ GitHub-backed MCP config shape:
 4. After the MCP server is available, ask the agent once:
 
 ```text
-Use agent-skill-vault MCP to bootstrap this project from https://github.com/RakiticVo/agent-skill-vault at v0.5.0 for context-building only. Install the lean context skills first, run doctor, then propose additional domain skills after reading the project spec.
+Use agent-skill-vault MCP to bootstrap this project from https://github.com/RakiticVo/agent-skill-vault at v0.6.0 for context-building only. Install the lean context skills first, run doctor, then propose additional domain skills after reading the project spec.
 ```
 
 The installer writes `AGENTS.md`, `CLAUDE.md`, `GEMINI.md`, `.agents/skills`, `.claude/skills`, and `.agents/skills.lock.json` into the project.
-
-## Mandatory AgentMemory
-
-Installed projects require AgentMemory as the shared memory layer for agents. By default, start the local memory server with:
-
-```bash
-npx @agentmemory/agentmemory
-```
-
-Then register an MCP server named `agentmemory` with:
-
-```json
-{
-  "mcpServers": {
-    "agentmemory": {
-      "command": "npx",
-      "args": ["-y", "@agentmemory/mcp"]
-    }
-  }
-}
-```
-
-The installer writes `.agents/integrations/agentmemory.mcp.example.json` into each target project. `doctor` reports missing integration files as errors and reports unavailable health checks with the exact setup command.
 
 ## Skill Authoring
 

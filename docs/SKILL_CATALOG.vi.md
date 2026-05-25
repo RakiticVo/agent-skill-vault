@@ -1,6 +1,6 @@
 # Danh mục Skill của Agent Skill Vault
 
-Agent Skill Vault hiện có **17 pack** và **111 skill**. File này là bản overview dễ đọc; từng file `SKILL.md` được link bên dưới vẫn là nguồn chính cho rule, checklist và trigger sử dụng.
+Agent Skill Vault hiện có **17 pack** và **110 skill**. File này là bản overview dễ đọc; từng file `SKILL.md` được link bên dưới vẫn là nguồn chính cho rule, checklist và trigger sử dụng.
 
 ## Cách Đọc Catalog
 
@@ -10,7 +10,6 @@ Agent Skill Vault hiện có **17 pack** và **111 skill**. File này là bản 
 
 ## Skill Bắt Buộc
 
-- [agentmemory-integration](../packs/agents/agentmemory-integration/SKILL.md) (Agents): Thiết lập và kiểm tra lớp bộ nhớ AgentMemory bắt buộc cho project đã cài skill.
 - [using-agent-skills](../packs/core/using-agent-skills/SKILL.md) (Core): Định nghĩa startup flow cho repo đã cài agent skills.
 - [flutter-clean-architecture](../packs/flutter/flutter-clean-architecture/SKILL.md) (Flutter): Áp đặt cấu trúc Clean Architecture theo feature-first cho Flutter app.
 - [flutter-default-stack](../packs/flutter/flutter-default-stack/SKILL.md) (Flutter): Định nghĩa package và tooling mặc định cho Flutter project cá nhân có AI hỗ trợ.
@@ -22,9 +21,9 @@ Agent Skill Vault hiện có **17 pack** và **111 skill**. File này là bản 
 
 ## Mục Lục
 
-- [Agents](#agents) (11 skill)
+- [Agents](#agents) (10 skill)
 - [AI](#ai) (8 skill)
-- [Code](#code) (11 skill)
+- [Code](#code) (10 skill)
 - [Core](#core) (4 skill)
 - [Creative](#creative) (2 skill)
 - [Data](#data) (1 skill)
@@ -32,7 +31,7 @@ Agent Skill Vault hiện có **17 pack** và **111 skill**. File này là bản 
 - [DevOps](#devops) (4 skill)
 - [Flutter](#flutter) (7 skill)
 - [Git](#git) (9 skill)
-- [JavaScript](#javascript) (11 skill)
+- [JavaScript](#javascript) (10 skill)
 - [Kotlin](#kotlin) (5 skill)
 - [MCP](#mcp) (5 skill)
 - [ML](#ml) (1 skill)
@@ -53,9 +52,6 @@ Các workflow cho agent runtime, bộ nhớ, điều phối, chọn vai trò và
 - **[agent-role-routing](../packs/agents/agent-role-routing/SKILL.md)**
   - Trạng thái: Optional
   - Dùng để làm gì: Chọn vai trò agent phù hợp cho kiến trúc, triển khai, test, review, design hoặc research.
-- **[agentmemory-integration](../packs/agents/agentmemory-integration/SKILL.md)**
-  - Trạng thái: Bắt buộc
-  - Dùng để làm gì: Thiết lập và kiểm tra lớp bộ nhớ AgentMemory bắt buộc cho project đã cài skill.
 - **[context-engineering](../packs/agents/context-engineering/SKILL.md)**
   - Trạng thái: Optional
   - Dùng để làm gì: Chuẩn bị instruction, file, docs, memory và tool đúng lúc trước khi agent bắt đầu hoặc resume việc.

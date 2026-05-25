@@ -58,7 +58,13 @@ export async function loadSkillIndex({ packsDir = packsRoot, packs = ['core', 'f
     for (const entry of entries) {
       if (!entry.isDirectory()) continue;
       const skillPath = path.join(packDir, entry.name, 'SKILL.md');
-      const text = await fs.readFile(skillPath, 'utf8');
+      let text;
+      try {
+        text = await fs.readFile(skillPath, 'utf8');
+      } catch (error) {
+        if (error?.code === 'ENOENT') continue;
+        throw error;
+      }
       const meta = parseFrontmatter(text);
       skills.push({
         id: entry.name,

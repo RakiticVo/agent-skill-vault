@@ -2,13 +2,12 @@
 
 File này hướng dẫn cách để **Antigravity agents làm việc với `agent-skill-vault` qua MCP** khi bắt đầu một Flutter project mới. Mục tiêu là để agent tự dùng MCP tools nhiều nhất có thể, thay vì bạn phải copy skill thủ công.
 
-Version khuyến nghị hiện tại: `v0.5.0`.
+Version khuyến nghị hiện tại: `v0.6.0`.
 
 ## Nguyên Tắc Chính
 
 - GitHub MCP chỉ là entrypoint để agent đọc repo và hướng dẫn.
 - `agent-skill-vault` MCP mới là tool cài skill, recommend stack, và chạy doctor.
-- AgentMemory MCP là memory layer bắt buộc cho project đã cài skill.
 - Không copy skill thủ công vào project. Agent phải gọi `install_skills`.
 - Nếu Antigravity không cho agent sửa MCP config, bạn chỉ paste config và reload MCP servers; các bước còn lại để agent làm.
 
@@ -25,37 +24,18 @@ Trước khi agent có thể gọi tools, Antigravity cần MCP config cho `agen
         "exec",
         "--yes",
         "--package",
-        "github:RakiticVo/agent-skill-vault#v0.5.0",
+        "github:RakiticVo/agent-skill-vault#v0.6.0",
         "--",
         "agent-skills",
         "mcp",
         "--source",
         "https://github.com/RakiticVo/agent-skill-vault",
         "--version",
-        "v0.5.0"
+        "v0.6.0"
       ]
     }
   }
 }
-```
-
-AgentMemory MCP:
-
-```json
-{
-  "mcpServers": {
-    "agentmemory": {
-      "command": "npx",
-      "args": ["-y", "@agentmemory/mcp"]
-    }
-  }
-}
-```
-
-Chạy AgentMemory server:
-
-```bash
-npx @agentmemory/agentmemory
 ```
 
 Sau khi thêm config, reload hoặc restart MCP servers trong Antigravity.
@@ -73,12 +53,12 @@ This is a new Flutter project, but requirements and use cases are not defined ye
 
 1. Call list_skills with:
    - sourceRepo: https://github.com/RakiticVo/agent-skill-vault
-   - version: v0.5.0
+   - version: v0.6.0
    - packs: all
 
 2. Call install_skills for the current project directory with:
    - sourceRepo: https://github.com/RakiticVo/agent-skill-vault
-   - version: v0.5.0
+   - version: v0.6.0
    - packs: core,planning,ai,agents,research,git,mcp
    - targets: codex,claude,gemini
 
@@ -144,7 +124,7 @@ Do the Flutter setup phase for the current project.
 2. Call install_skills with:
    - projectDir: current project directory
    - sourceRepo: https://github.com/RakiticVo/agent-skill-vault
-   - version: v0.5.0
+   - version: v0.6.0
    - packs: core,planning,ai,code,flutter,design,git,agents,mcp,research,security
    - targets: codex,claude,gemini
 
@@ -220,7 +200,7 @@ Khi project đã setup xong, dùng prompt feature như sau:
 Use installed skills and MCP tools.
 
 Before implementation:
-1. Search AgentMemory for project conventions and decisions.
+1. Read .agent-plans, ADRs, and project docs for project conventions and decisions.
 2. Read AGENTS.md, .agents/skills.lock.json, and relevant SKILL.md files.
 3. Read the active PRD/use cases under .agent-plans.
 4. State which skills you will use.
@@ -238,7 +218,7 @@ After implementation:
 1. Run relevant tests.
 2. Call agent-skill-vault doctor.
 3. Update .agent-plans with progress and verification evidence.
-4. Save durable decisions to AgentMemory.
+4. Save durable decisions to .agent-plans/decisions, ADRs, or project docs.
 5. Report what changed, what was verified, and remaining risks.
 ```
 
@@ -248,7 +228,7 @@ Dùng prompt này mỗi khi mở lại project:
 
 ```text
 Before working:
-1. Search AgentMemory for project conventions, decisions, and known issues.
+1. Read .agent-plans, ADRs, and project docs for project conventions, decisions, and known issues.
 2. Read AGENTS.md.
 3. Read .agents/skills.lock.json.
 4. Read relevant installed SKILL.md files.
@@ -272,7 +252,6 @@ Các file local vẫn là nguồn làm việc chính:
 
 Khi MCP bị tắt, agent phải đọc lock file, chọn skill local phù hợp, nêu skill đã dùng trong plan, và tự chạy checklist của skill trước khi báo hoàn thành. Chỉ cần bật lại `agent-skill-vault` MCP khi muốn install thêm pack, update skill, chạy doctor qua MCP, hoặc dùng `recommend_flutter_stack`.
 
-Lưu ý: `agentmemory` MCP là phần riêng. Nếu lock file yêu cầu AgentMemory thì vẫn nên giữ `agentmemory` MCP hoạt động để agent có bộ nhớ project.
 
 Xem thêm:
 
@@ -296,18 +275,18 @@ Nếu cài Flutter pack quá sớm, agent có thể chọn state management, pac
 
 ### MCP initialize báo `invalid character 'C' looking for beginning of value`
 
-Nguyên nhân thường là dùng tag cũ `v0.2.0`. Hãy dùng `v0.5.0`:
+Nguyên nhân thường là dùng tag cũ `v0.2.0`. Hãy dùng `v0.6.0`:
 
 ```json
 "--package",
-"github:RakiticVo/agent-skill-vault#v0.5.0"
+"github:RakiticVo/agent-skill-vault#v0.6.0"
 ```
 
 Và:
 
 ```json
 "--version",
-"v0.5.0"
+"v0.6.0"
 ```
 
 ### Agent không thấy tool `install_skills`
@@ -315,14 +294,4 @@ Và:
 - Reload MCP servers.
 - Kiểm tra config `agent-skill-vault`.
 - Đảm bảo `npm` chạy được trong môi trường Antigravity.
-- Đảm bảo config dùng `github:RakiticVo/agent-skill-vault#v0.5.0`.
-
-### Doctor báo AgentMemory chưa chạy
-
-Chạy:
-
-```bash
-npx @agentmemory/agentmemory
-```
-
-Sau đó reload MCP servers nếu cần.
+- Đảm bảo config dùng `github:RakiticVo/agent-skill-vault#v0.6.0`.

@@ -40,19 +40,16 @@ test('installer writes target layouts and pinned lock file', async () => {
   assert.ok(result.installedPacks.includes('flutter'));
   assert.ok(result.installed.includes('using-agent-skills'));
   assert.ok(result.installed.includes('flutter-clean-architecture'));
-  assert.ok(result.installed.includes('agentmemory-integration'));
+  assert.equal(result.installed.includes('agentmemory-integration'), false);
   assert.ok(await fs.stat(path.join(root, '.agents/skills/using-agent-skills/SKILL.md')));
   assert.ok(await fs.stat(path.join(root, '.agents/skills/flutter-clean-architecture/SKILL.md')));
-  assert.ok(await fs.stat(path.join(root, '.agents/skills/agentmemory-integration/SKILL.md')));
   assert.ok(await fs.stat(path.join(root, '.claude/skills/flutter-clean-architecture/SKILL.md')));
-  assert.ok(await fs.stat(path.join(root, '.agents/integrations/agentmemory.md')));
-  assert.ok(await fs.stat(path.join(root, '.agents/integrations/agentmemory.mcp.example.json')));
   const lock = JSON.parse(await fs.readFile(path.join(root, '.agents/skills.lock.json'), 'utf8'));
   assert.equal(lock.version, 'v0.1.0');
   assert.deepEqual(lock.installedPacks, ['core', 'flutter']);
   assert.deepEqual(lock.targetAgents, ['codex', 'claude', 'gemini']);
-  assert.deepEqual(lock.requiredIntegrations, ['agentmemory']);
-  assert.equal(lock.agentMemory.mcpServerName, 'agentmemory');
+  assert.deepEqual(lock.requiredIntegrations, []);
+  assert.equal(lock.agentMemory, undefined);
 });
 
 test('installer bootstrap files include MCP-free fallback', async () => {
@@ -75,7 +72,7 @@ test('installer supports core ai and code packs', async () => {
   assert.deepEqual(lock.installedPacks, ['core', 'ai', 'code']);
   assert.ok(lock.installedSkills.includes('reasoning-before-action'));
   assert.ok(lock.installedSkills.includes('solid-principles'));
-  assert.ok(lock.installedSkills.includes('agentmemory-integration'));
+  assert.equal(lock.installedSkills.includes('agentmemory-integration'), false);
 });
 
 test('installer supports design and mcp packs', async () => {
@@ -128,13 +125,17 @@ test('doctor passes a compliant installed project', async () => {
   assert.equal(result.ok, true);
 });
 
-test('doctor fails when mandatory AgentMemory integration files are missing', async () => {
+test('doctor ignores legacy AgentMemory integration requirements', async () => {
   const root = await makeProject();
   await installSkills({ projectDir: root, version: 'v0.1.0', targets: ['codex', 'claude', 'gemini'] });
-  await fs.rm(path.join(root, '.agents', 'integrations', 'agentmemory.md'));
+  const lockPath = path.join(root, '.agents', 'skills.lock.json');
+  const lock = JSON.parse(await fs.readFile(lockPath, 'utf8'));
+  lock.requiredIntegrations = ['agentmemory'];
+  lock.agentMemory = { required: true };
+  await fs.writeFile(lockPath, JSON.stringify(lock, null, 2));
   const result = await runDoctor({ projectDir: root });
-  assert.equal(result.ok, false);
-  assert.ok(result.issues.some((issue) => issue.code === 'missing_agentmemory_integration'));
+  assert.equal(result.ok, true);
+  assert.equal(result.issues.some((issue) => issue.code === 'missing_agentmemory_integration'), false);
 });
 
 test('doctor skips Flutter checks when Flutter pack is not installed', async () => {

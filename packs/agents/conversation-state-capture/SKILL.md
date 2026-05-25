@@ -1,6 +1,6 @@
 ---
 name: conversation-state-capture
-description: Use when preserving useful conversation state across sessions, deciding what to save to AgentMemory, AGENTS.md, plans, ADRs, issue trackers, or handoff notes, and keeping long-running agent collaboration coherent without storing noisy chat history.
+description: Use when preserving useful conversation state across sessions, deciding what to save to AGENTS.md, plans, ADRs, issue trackers, or handoff notes, and keeping long-running agent collaboration coherent without storing noisy chat history.
 required: false
 roles:
   - orchestrator
@@ -34,7 +34,7 @@ Save when the conversation establishes:
 
 Choose the storage target:
 
-- `AgentMemory`: durable preferences, conventions, and decisions that should follow future sessions.
+- Project docs: durable preferences, conventions, and decisions that should follow future sessions.
 - `AGENTS.md`: repo-wide operating rules every agent should read at startup.
 - `.agent-plans/`: active work state, task breakdowns, handoffs, and verification notes.
 - `docs/adr/`: architectural decisions with tradeoffs and consequences.

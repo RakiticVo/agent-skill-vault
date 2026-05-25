@@ -26,7 +26,7 @@ Use MCP as a context router, not a dumping ground.
 Routing order:
 
 - Use local repo files for current implementation truth.
-- Use AgentMemory for durable project decisions and preferences.
+- Use project plans, ADRs, and docs for durable project decisions and preferences.
 - Use installed skills for workflow rules.
 - Use MCP connectors for authenticated or structured systems such as GitHub, calendars, docs, or databases.
 - Use web search for current public information or external docs only when needed.
@@ -44,7 +44,7 @@ After calling a tool:
 - Extract the facts needed for the task.
 - Note source, freshness, and uncertainty.
 - Discard irrelevant raw output instead of carrying it forward.
-- Save durable decisions to memory or project docs when they affect future work.
+- Save durable decisions to project plans, ADRs, or docs when they affect future work.
 
 Security:
 

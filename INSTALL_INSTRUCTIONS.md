@@ -46,7 +46,7 @@ Replace `https://github.com/RakiticVo/agent-skill-vault` with the actual reposit
         "--source",
         "https://github.com/RakiticVo/agent-skill-vault",
         "--version",
-        "v0.5.0"
+        "v0.6.0"
       ]
     }
   }
@@ -71,7 +71,7 @@ For initial project context, do not install all Flutter, JavaScript, or other do
 {
   "projectDir": ".",
   "sourceRepo": "https://github.com/RakiticVo/agent-skill-vault",
-  "version": "v0.5.0",
+  "version": "v0.6.0",
   "packs": ["planning", "ai", "agents", "mcp", "research"],
   "targets": ["codex", "claude", "gemini"],
   "requestedSkills": [
@@ -90,8 +90,7 @@ For initial project context, do not install all Flutter, JavaScript, or other do
     "spec-driven-planning",
     "planning-and-task-breakdown",
     "project-plan-ledger",
-    "decision-log-and-adrs",
-    "agentmemory-integration"
+    "decision-log-and-adrs"
   ]
 }
 ```

@@ -31,5 +31,4 @@ Include:
 - Known risks, blockers, and skipped checks.
 - Exact next actions.
 
-Save to `.agent-plans/active/<plan-id>/HANDOFF.md` when available. For short tasks, include the handoff in the final response or AgentMemory.
-
+Save to `.agent-plans/active/<plan-id>/HANDOFF.md` when available. For short tasks, include the handoff in the final response or project docs.

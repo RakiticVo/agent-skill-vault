@@ -31,12 +31,10 @@ test('skill ids are globally unique for flat install layout', async () => {
   assert.equal(new Set(ids).size, ids.length);
 });
 
-test('lists mandatory AgentMemory integration skill', async () => {
+test('does not include AgentMemory integration skill', async () => {
   const result = await listSkills({ packs: ['agents'] });
   const skill = result.skills.find((item) => item.id === 'agentmemory-integration');
-  assert.ok(skill);
-  assert.equal(skill.required, true);
-  assert.ok(skill.source_inspired_by.includes('rohitg00/agentmemory'));
+  assert.equal(skill, undefined);
 });
 
 test('lists adapted addyosmani lifecycle skills in selected packs', async () => {

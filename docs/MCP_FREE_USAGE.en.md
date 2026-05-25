@@ -16,10 +16,8 @@ Agents can continue working from these local files:
 - `.agents/skills.lock.json`
 - `.agents/skills/<skill-id>/SKILL.md`
 - `.claude/skills/<skill-id>/SKILL.md` when Claude targets were installed
-- `.agents/integrations/agentmemory.md`
-- `.agents/integrations/agentmemory.mcp.example.json`
 
-The lock file is the source of truth for installed packs, installed skills, target agents, source repo, pinned version, and required integrations.
+The lock file is the source of truth for installed packs, installed skills, target agents, source repo, and pinned version.
 
 ## Agent Flow Without MCP
 
@@ -46,26 +44,7 @@ Re-enable `agent-skill-vault` MCP when the project needs one of these actions:
 If MCP is disabled but the CLI is available, the same maintenance actions can be run from the terminal:
 
 ```bash
-npx github:RakiticVo/agent-skill-vault#v0.5.0 agent-skills doctor --project .
-```
-
-## AgentMemory Is Separate
-
-Disabling `agent-skill-vault` MCP does not mean disabling `agentmemory` MCP.
-
-`agent-skill-vault` MCP manages skills. `agentmemory` MCP provides shared project memory across agent sessions.
-
-If `.agents/skills.lock.json` contains `requiredIntegrations: ["agentmemory"]`, agents should still:
-
-- Check whether the `agentmemory` MCP server is available.
-- Search memory before planning when available.
-- Save durable decisions after meaningful work.
-- Report clearly when AgentMemory is required but unavailable.
-
-Use the project-local config example:
-
-```text
-.agents/integrations/agentmemory.mcp.example.json
+npx github:RakiticVo/agent-skill-vault#v0.6.0 agent-skills doctor --project .
 ```
 
 ## Do Not Delete Installed Skill Files
@@ -80,4 +59,3 @@ Do not delete these files unless you intentionally want to remove the installed 
 - `AGENTS.md`
 - `CLAUDE.md`
 - `GEMINI.md`
-- `.agents/integrations`

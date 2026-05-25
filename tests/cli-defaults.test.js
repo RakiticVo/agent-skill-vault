@@ -25,6 +25,6 @@ test('CLI default install uses lean context bootstrap instead of Flutter pack', 
   assert.ok(result.installed.includes('context-engineering'));
   assert.ok(result.installed.includes('token-efficient-prompting'));
   assert.ok(result.installed.includes('mcp-context-routing'));
-  assert.ok(result.installed.includes('agentmemory-integration'));
+  assert.equal(result.installed.includes('agentmemory-integration'), false);
   assert.equal(result.installed.includes('flutter-clean-architecture'), false);
 });

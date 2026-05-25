@@ -1,6 +1,6 @@
 # Agent Skill Vault Skill Catalog
 
-Agent Skill Vault currently contains **17 packs** and **111 skills**. This catalog is the readable overview; each linked `SKILL.md` remains the source of truth for operating rules, checks, and usage triggers.
+Agent Skill Vault currently contains **17 packs** and **110 skills**. This catalog is the readable overview; each linked `SKILL.md` remains the source of truth for operating rules, checks, and usage triggers.
 
 ## How To Read This Catalog
 
@@ -10,7 +10,6 @@ Agent Skill Vault currently contains **17 packs** and **111 skills**. This catal
 
 ## Required Skills
 
-- [agentmemory-integration](../packs/agents/agentmemory-integration/SKILL.md) (Agents): Sets up and verifies the mandatory AgentMemory layer for installed projects.
 - [using-agent-skills](../packs/core/using-agent-skills/SKILL.md) (Core): Defines the startup flow for repositories with installed skills.
 - [flutter-clean-architecture](../packs/flutter/flutter-clean-architecture/SKILL.md) (Flutter): Enforces feature-first Clean Architecture structure for Flutter apps.
 - [flutter-default-stack](../packs/flutter/flutter-default-stack/SKILL.md) (Flutter): Defines default package and tooling choices for personal Flutter AI-assisted projects.
@@ -22,9 +21,9 @@ Agent Skill Vault currently contains **17 packs** and **111 skills**. This catal
 
 ## Table Of Contents
 
-- [Agents](#agents) (11 skills)
+- [Agents](#agents) (10 skills)
 - [AI](#ai) (8 skills)
-- [Code](#code) (11 skills)
+- [Code](#code) (10 skills)
 - [Core](#core) (4 skills)
 - [Creative](#creative) (2 skills)
 - [Data](#data) (1 skill)
@@ -32,7 +31,7 @@ Agent Skill Vault currently contains **17 packs** and **111 skills**. This catal
 - [DevOps](#devops) (4 skills)
 - [Flutter](#flutter) (7 skills)
 - [Git](#git) (9 skills)
-- [JavaScript](#javascript) (11 skills)
+- [JavaScript](#javascript) (10 skills)
 - [Kotlin](#kotlin) (5 skills)
 - [MCP](#mcp) (5 skills)
 - [ML](#ml) (1 skill)
@@ -53,9 +52,6 @@ Agent runtime, memory, orchestration, role routing, and completion discipline.
 - **[agent-role-routing](../packs/agents/agent-role-routing/SKILL.md)**
   - Status: Optional
   - Helps with: Selects the right agent role for architecture, implementation, testing, review, design, or research.
-- **[agentmemory-integration](../packs/agents/agentmemory-integration/SKILL.md)**
-  - Status: Required
-  - Helps with: Sets up and verifies the mandatory AgentMemory layer for installed projects.
 - **[context-engineering](../packs/agents/context-engineering/SKILL.md)**
   - Status: Optional
   - Helps with: Prepares the right instructions, files, docs, memory, and tools before agent work starts or resumes.
