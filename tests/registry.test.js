@@ -6,6 +6,7 @@ test('lists skills by pack', async () => {
   const result = await listSkills({ packs: ['core', 'flutter'] });
   assert.ok(result.packs.includes('core'));
   assert.ok(result.packs.includes('flutter'));
+  assert.equal(result.skills[0].id, 'using-agent-skills');
   assert.ok(result.skills.some((skill) => skill.id === 'using-agent-skills' && skill.pack === 'core'));
   assert.ok(result.skills.some((skill) => skill.id === 'flutter-clean-architecture' && skill.pack === 'flutter'));
   assert.ok(result.skills.every((skill) => Array.isArray(skill.source_inspired_by)));

@@ -19,17 +19,30 @@ const mandatoryAgentMemory = {
   mcpCommand: 'npx -y @agentmemory/mcp'
 };
 
+const firstClassSkills = ['using-agent-skills'];
+
+function prioritizeSkillIds(ids) {
+  const seen = new Set();
+  const ordered = [];
+  for (const id of [...firstClassSkills, ...ids]) {
+    if (seen.has(id)) continue;
+    seen.add(id);
+    ordered.push(id);
+  }
+  return ordered;
+}
+
 function normalizeSkillSelection(requestedSkills, skills) {
   if (!requestedSkills?.length || requestedSkills.includes('all')) {
-    return skills.map((skill) => skill.id);
+    return prioritizeSkillIds(skills.map((skill) => skill.id));
   }
   const known = new Set(skills.map((skill) => skill.id));
-  const selected = new Set(skills.filter((skill) => skill.pack === 'core').map((skill) => skill.id));
+  const selected = new Set(prioritizeSkillIds(skills.filter((skill) => skill.pack === 'core').map((skill) => skill.id)));
   for (const id of requestedSkills) {
     if (!known.has(id)) throw new Error(`Unknown skill: ${id}`);
     selected.add(id);
   }
-  return [...selected];
+  return prioritizeSkillIds([...selected]);
 }
 
 function normalizePacks(packs) {
@@ -145,7 +158,7 @@ Clone and self-host \`rohitg00/agentmemory\` only when you need to pin a commit,
   ];
 }
 
-export async function installSkills({ projectDir, targets = ['codex', 'claude', 'gemini'], packs = ['flutter'], version = 'v0.4.0', requestedSkills = ['all'], sourceRepo = 'local' }) {
+export async function installSkills({ projectDir, targets = ['codex', 'claude', 'gemini'], packs = ['flutter'], version = 'v0.5.0', requestedSkills = ['all'], sourceRepo = 'local' }) {
   const absoluteProject = path.resolve(projectDir);
   const source = await resolveSkillSource({ sourceRepo, version });
   try {
@@ -158,13 +171,14 @@ export async function installSkills({ projectDir, targets = ['codex', 'claude', 
       throw new Error('Missing mandatory skill: agentmemory-integration');
     }
     if (!selected.includes('agentmemory-integration')) selected.push('agentmemory-integration');
+    const selectedForInstall = prioritizeSkillIds(selected);
     const uniqueTargets = [...new Set(targets)];
 
     for (const target of uniqueTargets) {
       if (!targetDirs[target]) throw new Error(`Unsupported target: ${target}`);
       const baseDir = path.join(absoluteProject, targetDirs[target]);
       await ensureDir(baseDir);
-      for (const skill of skills.filter((item) => selected.includes(item.id))) {
+      for (const skill of skills.filter((item) => selectedForInstall.includes(item.id))) {
         await copyDir(path.dirname(skill.path), path.join(baseDir, skill.id));
       }
     }
@@ -186,7 +200,7 @@ export async function installSkills({ projectDir, targets = ['codex', 'claude', 
       sourceRepo: source.sourceRepo,
       version: source.version,
       installedPacks,
-      installedSkills: selected,
+      installedSkills: selectedForInstall,
       targetAgents: uniqueTargets,
       requiredIntegrations: ['agentmemory'],
       agentMemory: mandatoryAgentMemory,
@@ -201,7 +215,7 @@ export async function installSkills({ projectDir, targets = ['codex', 'claude', 
       sourceRepo: lock.sourceRepo,
       version: lock.version,
       installedPacks,
-      installed: selected,
+      installed: selectedForInstall,
       targets: uniqueTargets,
       planningFiles,
       integrationFiles,

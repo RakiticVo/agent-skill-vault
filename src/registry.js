@@ -3,6 +3,8 @@ import path from 'node:path';
 import { packsRoot } from './paths.js';
 import { resolveSkillSource } from './source.js';
 
+const firstClassSkills = ['using-agent-skills'];
+
 function parseFrontmatter(text) {
   if (!text.startsWith('---')) return {};
   const end = text.indexOf('\n---', 3);
@@ -72,7 +74,16 @@ export async function loadSkillIndex({ packsDir = packsRoot, packs = ['core', 'f
       });
     }
   }
-  return skills.sort((a, b) => `${a.pack}/${a.id}`.localeCompare(`${b.pack}/${b.id}`));
+  return skills.sort((a, b) => {
+    const aPriority = firstClassSkills.indexOf(a.id);
+    const bPriority = firstClassSkills.indexOf(b.id);
+    if (aPriority !== -1 || bPriority !== -1) {
+      if (aPriority === -1) return 1;
+      if (bPriority === -1) return -1;
+      return aPriority - bPriority;
+    }
+    return `${a.pack}/${a.id}`.localeCompare(`${b.pack}/${b.id}`);
+  });
 }
 
 export async function listSkills(options = {}) {

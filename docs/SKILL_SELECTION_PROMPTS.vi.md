@@ -14,7 +14,7 @@ Do not install full domain packs yet. Install only the skills needed for project
 Call install_skills with:
 - projectDir: "."
 - sourceRepo: "https://github.com/RakiticVo/agent-skill-vault"
-- version: "v0.4.0"
+- version: "v0.5.0"
 - targets: ["codex", "claude", "gemini"]
 - packs: ["planning", "ai", "agents", "mcp", "research"]
 - requestedSkills:
@@ -71,7 +71,7 @@ Use agent-skill-vault MCP to install the approved React + Next.js implementation
 Call install_skills with:
 - projectDir: "."
 - sourceRepo: "https://github.com/RakiticVo/agent-skill-vault"
-- version: "v0.4.0"
+- version: "v0.5.0"
 - targets: ["codex", "claude", "gemini"]
 - packs: ["javascript", "code", "design", "security", "git"]
 - requestedSkills:

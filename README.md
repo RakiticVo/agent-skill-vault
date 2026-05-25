@@ -9,11 +9,11 @@ If an agent reaches this repository through GitHub MCP first, start with [INSTAL
 ```bash
 node ./bin/agent-skills.js list --pack all
 node ./bin/agent-skills.js list --pack planning,ai,code,design,git,agents,mcp,research,security,devops,data,ml,creative
-node ./bin/agent-skills.js list --source https://github.com/RakiticVo/agent-skill-vault --version v0.4.0 --pack planning,ai,agents,mcp,research
+node ./bin/agent-skills.js list --source https://github.com/RakiticVo/agent-skill-vault --version v0.5.0 --pack planning,ai,agents,mcp,research
 node ./bin/agent-skills.js recommend-flutter-stack --size medium --flow standard
-node ./bin/agent-skills.js install --project /path/to/project --source https://github.com/RakiticVo/agent-skill-vault --version v0.4.0 --targets codex,claude,gemini
+node ./bin/agent-skills.js install --project /path/to/project --source https://github.com/RakiticVo/agent-skill-vault --version v0.5.0 --targets codex,claude,gemini
 node ./bin/agent-skills.js doctor --project /path/to/flutter_app
-node ./bin/agent-skills.js update --project /path/to/flutter_app --version v0.4.0
+node ./bin/agent-skills.js update --project /path/to/flutter_app --version v0.5.0
 node ./bin/agent-skills.js mcp
 ```
 
@@ -38,11 +38,11 @@ node ./bin/agent-skills.js doctor --project C:\tmp\skill-smoke
 
 ## Versioning
 
-Create Git tags such as `v0.4.0`, `v0.5.0`, and install using `--version`. This keeps each project stable until you intentionally update skills.
+Create Git tags such as `v0.5.0`, `v0.6.0`, and install using `--version`. This keeps each project stable until you intentionally update skills.
 
 ```bash
-git tag v0.4.0
-git push origin v0.4.0
+git tag v0.5.0
+git push origin v0.5.0
 ```
 
 ## MCP Tools
@@ -54,6 +54,12 @@ The MCP stdio server exposes:
 - `install_skills`
 - `update_skills`
 - `doctor`
+
+`list_skills` and `install_skills` put `using-agent-skills` first. This meta-skill is mandatory because it teaches agents how to select and invoke the rest of the installed skills before they plan or edit.
+
+After installation, skills are invoked by intent, not by executing the `SKILL.md` files. In hosts with slash-command support, map lifecycle commands such as `/spec`, `/plan`, `/build`, `/test`, `/review`, `/code-simplify`, and `/ship` to the matching installed skills. In hosts without slash-command support, ask the agent directly, for example: "Use `using-agent-skills`, then apply `/plan` for this feature" or "Use `code-review` on this diff."
+
+Agents that read `AGENTS.md` and installed `SKILL.md` files should invoke matching skills automatically. `using-agent-skills` is the router: it maps normal task descriptions, lifecycle aliases, repository context, and installed metadata to the smallest relevant skill set.
 
 Current V1 packs:
 
@@ -131,7 +137,7 @@ GitHub-backed MCP config shape:
         "--source",
         "https://github.com/RakiticVo/agent-skill-vault",
         "--version",
-        "v0.4.0"
+        "v0.5.0"
       ]
     }
   }
@@ -146,7 +152,7 @@ GitHub-backed MCP config shape:
 4. After the MCP server is available, ask the agent once:
 
 ```text
-Use agent-skill-vault MCP to bootstrap this project from https://github.com/RakiticVo/agent-skill-vault at v0.4.0 for context-building only. Install the lean context skills first, run doctor, then propose additional domain skills after reading the project spec.
+Use agent-skill-vault MCP to bootstrap this project from https://github.com/RakiticVo/agent-skill-vault at v0.5.0 for context-building only. Install the lean context skills first, run doctor, then propose additional domain skills after reading the project spec.
 ```
 
 The installer writes `AGENTS.md`, `CLAUDE.md`, `GEMINI.md`, `.agents/skills`, `.claude/skills`, and `.agents/skills.lock.json` into the project.

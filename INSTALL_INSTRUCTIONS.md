@@ -46,7 +46,7 @@ Replace `https://github.com/RakiticVo/agent-skill-vault` with the actual reposit
         "--source",
         "https://github.com/RakiticVo/agent-skill-vault",
         "--version",
-        "v0.4.0"
+        "v0.5.0"
       ]
     }
   }
@@ -71,7 +71,7 @@ For initial project context, do not install all Flutter, JavaScript, or other do
 {
   "projectDir": ".",
   "sourceRepo": "https://github.com/RakiticVo/agent-skill-vault",
-  "version": "v0.4.0",
+  "version": "v0.5.0",
   "packs": ["planning", "ai", "agents", "mcp", "research"],
   "targets": ["codex", "claude", "gemini"],
   "requestedSkills": [
@@ -100,6 +100,17 @@ For initial project context, do not install all Flutter, JavaScript, or other do
 7. Create or read the initial project spec.
 8. After the spec exists, install only the additional skills required by that spec. See `docs/SKILL_SELECTION_PROMPTS.vi.md` for prompt templates.
 9. For future tasks, read `AGENTS.md`, `CLAUDE.md`, `GEMINI.md`, and the installed skill files before planning or editing.
+
+`using-agent-skills` is mandatory and must be read before all other installed skills. It is the local replacement for a slash-command router when the host does not provide native commands.
+
+After install, users can invoke skills in either form:
+
+- Skill name: "Use `code-review` on this diff."
+- Lifecycle intent: `/spec`, `/plan`, `/build`, `/test`, `/review`, `/code-simplify`, or `/ship`.
+
+If the host supports slash commands, wire those aliases to the installed skills. If it does not, treat the text as normal user intent and select the matching local skills through `using-agent-skills`.
+
+Agents should not wait for users to name a skill. After reading `using-agent-skills`, they must infer the needed skills from the task, files, stack, and installed metadata, then name the selected skills before planning or editing.
 
 For broader projects, add packs such as `code`, `design`, `git`, `security`, `devops`, `data`, `ml`, `creative`, `kotlin`, `javascript`, or `flutter` only after the spec makes them relevant. Prefer `requestedSkills` with explicit skill IDs over `requestedSkills: ["all"]`.
 

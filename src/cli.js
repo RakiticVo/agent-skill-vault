@@ -53,12 +53,12 @@ function help() {
   return `Agent Skill Vault
 
 Usage:
-  agent-skills list [--pack all|core,planning,ai,code,flutter,kotlin,javascript,design,git,agents,mcp,research,security,devops,data,ml,creative] [--source github:user/repo|https://github.com/user/repo] [--version v0.4.0]
+  agent-skills list [--pack all|core,planning,ai,code,flutter,kotlin,javascript,design,git,agents,mcp,research,security,devops,data,ml,creative] [--source github:user/repo|https://github.com/user/repo] [--version v0.5.0]
   agent-skills recommend-flutter-stack [--size small|medium|large] [--flow simple|standard|event-heavy] [--async simple|complex]
-  agent-skills install --project <path> [--packs core,planning,ai,code,security,devops] [--source github:user/repo|https://github.com/user/repo] [--targets codex,claude,gemini] [--version v0.4.0] [--skills all|name,name]
+  agent-skills install --project <path> [--packs core,planning,ai,code,security,devops] [--source github:user/repo|https://github.com/user/repo] [--targets codex,claude,gemini] [--version v0.5.0] [--skills all|name,name]
   agent-skills update --project <path> --version <vX.Y.Z>
   agent-skills doctor --project <path> [--packs flutter]
-  agent-skills mcp [--source github:user/repo|https://github.com/user/repo] [--version v0.4.0]
+  agent-skills mcp [--source github:user/repo|https://github.com/user/repo] [--version v0.5.0]
 
 Default install without --packs/--skills installs a lean context bootstrap set, not a full domain pack.
 `;
@@ -74,7 +74,7 @@ export async function main(argv) {
   }
 
   if (command === 'list') {
-    printJson(await listSkills({ sourceRepo: args.source || 'local', version: args.version || 'v0.4.0', packs: args.pack || args.packs || 'all' }));
+    printJson(await listSkills({ sourceRepo: args.source || 'local', version: args.version || 'v0.5.0', packs: args.pack || args.packs || 'all' }));
     return;
   }
 
@@ -96,7 +96,7 @@ export async function main(argv) {
       projectDir: args.project,
       targets: String(args.targets || 'codex,claude,gemini').split(',').map((x) => x.trim()).filter(Boolean),
       packs: hasPacks ? String(args.packs).split(',').map((x) => x.trim()).filter(Boolean) : contextBootstrapPacks,
-      version: args.version || 'v0.4.0',
+      version: args.version || 'v0.5.0',
       requestedSkills: hasSkills ? String(args.skills).split(',').map((x) => x.trim()) : (hasPacks ? ['all'] : contextBootstrapSkills),
       sourceRepo: args.source || 'local'
     });
@@ -119,7 +119,7 @@ export async function main(argv) {
 
   if (command === 'mcp') {
     await runMcpServer({
-      listSkills: (toolArgs = {}) => listSkills({ sourceRepo: toolArgs.sourceRepo || args.source || 'local', version: toolArgs.version || args.version || 'v0.4.0', packs: toolArgs.packs || 'all' }),
+      listSkills: (toolArgs = {}) => listSkills({ sourceRepo: toolArgs.sourceRepo || args.source || 'local', version: toolArgs.version || args.version || 'v0.5.0', packs: toolArgs.packs || 'all' }),
       loadSkillIndex,
       recommendFlutterStack: recommendStack,
       installSkills: (toolArgs) => {
@@ -130,7 +130,7 @@ export async function main(argv) {
           packs: hasPacks ? toolArgs.packs : contextBootstrapPacks,
           requestedSkills: hasSkills ? toolArgs.requestedSkills : (hasPacks ? ['all'] : contextBootstrapSkills),
           sourceRepo: toolArgs.sourceRepo || args.source || 'local',
-          version: toolArgs.version || args.version || 'v0.4.0'
+          version: toolArgs.version || args.version || 'v0.5.0'
         });
       },
       updateSkills: (toolArgs) => updateSkills({ ...toolArgs, sourceRepo: toolArgs.sourceRepo || args.source }),

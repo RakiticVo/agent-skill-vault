@@ -46,7 +46,7 @@ Re-enable `agent-skill-vault` MCP when the project needs one of these actions:
 If MCP is disabled but the CLI is available, the same maintenance actions can be run from the terminal:
 
 ```bash
-npx github:RakiticVo/agent-skill-vault#v0.4.0 agent-skills doctor --project .
+npx github:RakiticVo/agent-skill-vault#v0.5.0 agent-skills doctor --project .
 ```
 
 ## AgentMemory Is Separate

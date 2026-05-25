@@ -21,6 +21,7 @@ test('CLI default install uses lean context bootstrap instead of Flutter pack', 
 
   const result = JSON.parse(stdout);
   assert.deepEqual(result.installedPacks, ['core', 'planning', 'ai', 'agents', 'mcp', 'research']);
+  assert.equal(result.installed[0], 'using-agent-skills');
   assert.ok(result.installed.includes('context-engineering'));
   assert.ok(result.installed.includes('token-efficient-prompting'));
   assert.ok(result.installed.includes('mcp-context-routing'));
